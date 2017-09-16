@@ -68,11 +68,11 @@
             }
         },
         methods:{
-            delet: function (n) {              //在vue2.0+  delete会出现报错
+            delet: function (n) {              //在vue2.0+  delete会出现模板渲染错误
                 //$remove()删除 filter
 //                this.phones.$remove(phone)    $remove(phone)是vue1.0+  在vue2.0+不适用
                 this.phones.splice(n,1)
-                console.log(phone)
+                console.log(n)
             },
             addFun: function () {
                 this.phones.push({name:this.list.name,price:this.list.price,count:this.list.count});
