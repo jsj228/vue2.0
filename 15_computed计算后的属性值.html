@@ -16,13 +16,13 @@
             <td>小计</td>
             <td>操作</td>
         </tr>
-        <tr v-for="phone in phones">
-            <td>{{$index+1}}</td>
+        <tr v-for="(phone,key) in phones">
+            <td>{{key+1}}</td>
             <td>{{phone.name}}</td>
             <td>{{phone.price}}</td>
             <td><input type="text" v-model="phone.count"></td>
             <td>{{phone.price*phone.count}}</td>
-            <td><button class="btn btn-primary" @click="delete(phone)">删除</button></td>
+            <td><button class="btn btn-primary" @click="delet(phone)">删除</button></td>
         </tr>
         <tr>
             <td colspan="6">总价格{{total}}</td>
@@ -42,13 +42,14 @@
             <label class="control-label">数量</label>
             <input type="text" v-model="list.count" class="form-control">
         </div>
-        <button class="btn btn-block"  @click="appendInfo">添加</button>
+        <button class="btn btn-block"  @click="addFun">添加</button>
     </div>
 
 
 
 </div>
-<script src="vue1.+.js"></script>
+<!--<script src="vue1.+.js"></script>-->
+<script src="vue.2.42.js"></script>
 <script>
     var vm = new Vue({
         el:'#app',
@@ -67,23 +68,17 @@
             }
         },
         methods:{
-            delete: function (phone) {
+            delet: function (n) {              //在vue2.0+  delete会出现报错
                 //$remove()删除 filter
-                this.phones.$remove(phone)
+//                this.phones.$remove(phone)    $remove(phone)是vue1.0+  在vue2.0+不适用
+                this.phones.splice(n,1)
                 console.log(phone)
             },
-            appendInfo: function () {
+            addFun: function () {
                 this.phones.push({name:this.list.name,price:this.list.price,count:this.list.count});
             },
-           /* total: function () {
-                var sum = 0;
-                this.phones.forEach(function (item) {
-                    sum += item.price*item.count;
-                });
-                return sum;
-            }*/
         },
-        computed:{
+        computed:{               //      使用 computed 计算数据
             total: function () {
                 var sum = 0;
                 this.phones.forEach(function (item) {
