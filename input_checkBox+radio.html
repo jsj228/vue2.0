@@ -26,7 +26,7 @@
     <!--checkbox-->
     <div v-for="(rad,key) in chekboxList">
         <!--处理（）内的数组显示成字符串-->
-        <h4>{{key+4}}/.{{rad.text}}  (<b >{{rad.radStr }}</b>)</h4>
+        <h4>{{key+4}}/.{{rad.text}}  (<b >{{rad.checkStr }}</b>)</h4>
            <span v-for="(vl,ABC) in rad.list">
                <input type="checkbox"  :value="ABC"  v-model="rad.radio"
                       :name="rad.name"
@@ -52,7 +52,7 @@
                 {text:'789',name:'cc',list:{A:'aa',B:'bbb',C:'cc'},radio:[]},
             ],
             chekboxList:[
-                {text:'123',name:'aa',list:{A:'aaa',B:'bbb',C:'ccc'},radio:[],radStr:'',},
+                {text:'123',name:'aa',list:{A:'aaa',B:'bbb',C:'ccc'},radio:[],checkStr:'',},
                 {text:'456',name:'bb',list:{A:'aaaa',B:'bbbbb',C:'cccccc'},radio:[]},
                 {text:'789',name:'cc',list:{A:'aaaaa',B:'bbbbbbb',C:'ccccccc'},radio:[]},
             ],
@@ -65,9 +65,8 @@
 
 //                处理（）内的数组以字符串显示- 所以上一步就不用调样式了
                 //当input type=radio时，typeof this.radioList[n].radio接受的数据类型是String类型的，当input type=checkBox时，typeof this.chekboxList[n].radio接受的数据类型是数组对象。
-                typeof this.chekboxList[n].radio=="string"|typeof this.radioList[n].radio=="string"?
-                        this.radioList[n].radStr=this.radioList[n].radio:
-                        this.chekboxList[n].radStr=this.chekboxList[n].radio.join();
+                typeof this.chekboxList[n].radio=="string"?this.radioList[n].radStr=this.radioList[n].radio:this.chekboxList[n].checkStr=this.chekboxList[n].radio.join();
+                typeof this.radioList[n].radio=="string"?this.radioList[n].radStr=this.radioList[n].radio:this.chekboxList[n].checkStr=this.chekboxList[n].radio.join();
 
             }
         }
