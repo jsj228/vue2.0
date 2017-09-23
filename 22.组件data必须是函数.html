@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <test></test>
+    <test></test>
+    <test></test>
+    <test></test>
+</div>
+</div>
+
+<script src="vue1.+.js"></script>
+<script>
+    //把html取出来当作模板，用数据渲染好，将我们的组件扔到页面里
+    //用extend方法创建出组建,在实例创建前
+
+    //注册组件 第一个参数是组件的名字，第二个参数是创建的组件
+
+
+    Vue.component('test',
+            {
+                template:'<div><button @click="n += 1">{{test}}{{n}}</button></div>',
+//                data:{   //这时 Vue 会停止，并在控制台发出警告，告诉你在组件中 data 必须是一个函数。
+//                    test:'123',
+//                }
+                data:function(){
+                    return {
+                        test:'点击',
+                         n:0,
+
+                    };
+                }
+            }
+
+
+    );
+    var vm = new Vue({
+        el:'#app',
+    });
+</script>
+</body>
+</html>

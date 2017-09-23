@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <hellod></hellod>
+
+    <hello></hello>
+    <hello></hello>
+
+    <world></world>
+    <world></world>
+
+    <test></test>
+
+    <aa></aa>
+</div>
+<template id="tmpl">
+    <ul>
+        <li>home {{name}}</li>
+        <li>profile</li>
+        <li>concat</li>
+    </ul>
+</template>
+<script src="vue1.+.js"></script>
+<script>
+    //把html取出来当作模板，用数据渲染好，将我们的组件扔到页面里
+    //用extend方法创建出组建,在实例创建前
+    var hellod = Vue.extend({
+        //template就是组件的模板
+        template:"22.html#tmpl"
+    });
+    var hello = Vue.extend({
+        //template就是组件的模板
+        template:"#tmpl"
+    });
+    var world = Vue.extend({
+        //template就是组件的模板
+        template:'<div>my world</div>'
+    });
+    //注册组件 第一个参数是组件的名字，第二个参数是创建的组件
+    Vue.component('hellod',hellod);
+    Vue.component('hello',hello);
+    Vue.component('world',world);
+    //template就是组件的模板    有无extend都要在实例前面创建组件
+    Vue.component('test', Vue.extend({template:"22.html#tmpl"}));
+    Vue.component('aa', {template:"aaaaaaaaa"});
+    var vm = new Vue({
+        el:'#app',
+    });
+//    在这里创建是无效的
+//    Vue.component('test', Vue.extend({template:"22.html#tmpl"}));
+//    Vue.component('aa', {template:"aaaaaaaaa"});
+</script>
+</body>
+</html>

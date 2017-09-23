@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <!--<child message="hello"></child>-->
+
+<!--HTML 特性是不区分大小写的。所以，当使用的不是字符串模板，驼峰式命名的 prop 需要转换为相对应的短横线隔开式命名：-->
+
+    <div>
+        <!--使用v-bind：传number类型的数字-->
+        <child  :number="1"></child>
+    </div>
+
+</div>
+
+<script src="vue.2.42.js"></script>
+<script>
+
+    Vue.component('child', {
+        // camelCase in JavaScript
+        props: ['number'],
+        template: '<span>{{number}}</span>',
+
+    })
+
+
+
+
+
+
+
+
+
+    var vm = new Vue({
+        el:'#app',
+
+    });
+</script>
+</body>
+</html>
