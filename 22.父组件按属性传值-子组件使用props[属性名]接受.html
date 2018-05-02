@@ -14,8 +14,9 @@
         <!--HTML 特性是不区分大小写的。所以，当使用的不是字符串模板，驼峰式命名的 prop 需要转换为相对应的短横线隔开式命名：-->
 
         <div>
+            <input type="text" v-model="num"><br>
             <!--使用v-bind：传number类型的数字-->
-            <child :number="1"></child>
+            <child :number="num"></child>
         </div>
 
     </div>
@@ -25,11 +26,13 @@
         Vue.component('child', {
             // camelCase in JavaScript
             props: ['number'],
-            template: '<span>组件的字面量----{{number}}</span>',
+            template: '<span>父组件按属性传值-子组件使用props[属性名]接受--->{{number}}</span>',
         })
         var vm = new Vue({
             el: '#app',
-
+            data:{
+                num:10,
+            }
         });
     </script>
 </body>

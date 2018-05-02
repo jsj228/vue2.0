@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="../js/vue2.0.js"></script>
+<div id="myVue">
+    {{name}}
+</div>
+<script>
+
+    var VM = new Vue({
+       el:'#myVue',
+        data:{name:'jsj'},
+        render:function(createElement){
+            return createElement(
+                "ul",
+                 [
+                     createElement("li",1),
+                     createElement("li",2),
+                     createElement("li",3),
+                     createElement("li",4)
+                 ]
+            );
+        }
+    });
+</script>
+
+</body>
+</html>

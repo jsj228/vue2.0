@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <p class="p1" :class="{ 'active':active,'unactive':!active}">对象语法</p>
+        <p class="p1" :class="[ClassA,ClassB]">数组语法</p>
+    </div>
+    <script src="vue2.0.js"></script>
+    <script>
+        var obj = {
+            active: true,
+            ClassA: 'calss-A',
+            ClassB: 'calss-B',
+        };
+        // 声名式渲染
+        var vm = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {
+                btnClick() {
+                    console.log(this.name);
+                    console.log(this.selectedList);
+                }
+            }
+
+        });
+        // vm.$mount('#app');//使用$mount查找#pp并绑定vue 
+        console.log(vm);
+        console.log(vm.gender);
+        console.log(vm.$data);
+    </script>
+</body>
+
+</html>

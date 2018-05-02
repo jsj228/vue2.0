@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-if,v-else,v-show,v-for</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-if="vIf">v-if 操作DOM级别</p>
+        <p v-else="vElse" v-text="vElse">v-else要紧跟着v-if之后才生效</p>
+        <p v-show="vShow">show改变CSS的display属性</p>
+        <p v-show="vHide">show改变CSS的display属性</p>
+        <li v-for="itme in vFor" v-text="itme"></li>
+        <li v-for="(itme,index) in vFor" v-text="index+'----'+itme"></li>
+    </div>
+    <script src="vue2.0.js"></script>
+    <script>
+        var obj = {
+            vIf: false,
+            vElse: 'v - else要紧跟着v - if之后才生效',
+            vShow: true,
+            vHide: false,
+            vFor: ['111', '222', '333'],
+        };
+        // 声名式渲染
+        var vm = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {}
+
+        });
+        // vm.$mount('#app');//使用$mount查找#pp并绑定vue 
+        console.log(vm);
+        console.log(vm.gender);
+        console.log(vm.$data);
+    </script>
+</body>
+
+</html>

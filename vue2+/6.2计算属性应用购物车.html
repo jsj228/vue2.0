@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img {
+            width: 50px;
+        }
+        
+        input {
+            width: 16px;
+            height: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th colspan="2">名 称</th>
+                <th>数 量</th>
+                <th>价 格</th>
+                <th>小 计</th>
+                <th>操 作</th>
+            </tr>
+            <tr v-for="(pro,key) in product">
+                <td><img :src="pro.src"></td>
+                <td>
+                    <h1 v-text="pro.name"></h1>
+                </td>
+                <td>
+                    <button class="jian" @click="jian(key)">-</button>
+                    <input type="text" v-model="pro.num">
+                    <button class="jia" @click="jia(key)">+</button>
+                </td>
+                <td><b v-text="pro.price"></b></td>
+                <td><b v-text="pro.num*pro.price"></b></td>
+                <td><button @click="deletePro(key)">&times;</button></td>
+            </tr>
+            <tr>
+                <!-- <td>总计：{{b}} RMB</td> -->
+                <td>总计：{{b}} &yen;</td>
+                <!-- &yen;美元符号 -->
+            </tr>
+
+        </table>
+        <!-- <div v-if=b==0> -->
+        <div v-show=b==0>
+            <hr> 没有更多的，请添加商品到购物车！！
+        </div>
+    </div>
+    <script src="vue2.0购物车/js/vue2.0.js"></script>
+    <script>
+        var vm = new Vue({
+            data: {
+                num: 0,
+                product: [{
+                    name: '商品一',
+                    src: './vue2.0购物车/images/f1.jpg',
+                    price: 550,
+                    num: 1
+                }, {
+                    name: '商品二',
+                    src: './vue2.0购物车/images/f2.jpg',
+                    price: 450,
+                    num: 1
+                }, {
+                    name: '商品三',
+                    src: './vue2.0购物车/images/f3.jpg',
+                    price: 520,
+                    num: 1
+                }, {
+                    name: '商品四',
+                    src: './vue2.0购物车/images/f5.jpg',
+                    price: 410,
+                    num: 1
+                }, ]
+            },
+            methods: {
+                jia: function(i) {
+                    console.log(this.product[i].num++);
+                },
+                jian: function(i) {
+                    console.log(i);
+                },
+                deletePro: function(i) {
+                    this.product.splice(i, 1);
+                    console.log(i);
+                },
+            },
+            computed: { //有些数据是要根据我们的提供的数据计算出来的
+                // 默认的是获取属性 在页面中获取属性b会调用对应的方法
+                b: function() {
+                    for (var i = sum = 0; i < this.product.length; i++) {
+                        sum += this.product[i].num * this.product[i].price;
+                    }
+                    //当前this是vue的实例
+                    return sum.toFixed(2);
+                }
+            }
+        });
+        vm.$mount('#app'); //使用$mount查找#pp并绑定vue
+    </script>
+</body>
+
+</html

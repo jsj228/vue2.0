@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<style>
+    .active{color: #0ff;}
+    #activeId{background:#00f}
+</style>
+<h1 id="myVue" v-bind:class="elClass" v-bind:id="elID" :title="title" >这是我的{{title}}
+    <br><img :src="imgurl"  :alt="imgAlt"></h1>   <!--    v-bind:属性名=值  可以绑定任何属性    -->
+
+<!--&lt;!&ndash; <h1 id="myVue" :class="elClass" :id="elID">这是我的{{title}}</h1>     省略v-bind后-->
+<script>
+    app=new Vue({       //Vue首字母要大写
+        el:'#myVue',  //在Vue中使用el声明控制的el Id=myVue元素代码范围，id#myVue只能放置body内  在这里也可以使用class
+        data:{          //在data中放置模块数据
+            title:'jsj',
+            elClass:'active active2',
+            elID:'activeId',
+            elIf:true,
+            imgurl:"images/XXX.png",
+            imgAlt:"XXX"
+        }
+    });
+</script>
+</body>
+</html>

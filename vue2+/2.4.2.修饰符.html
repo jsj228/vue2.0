@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-if,v-else,v-show,v-for</title>
+</head>
+
+<body>
+    <div id="app">
+        <a :href="href" v-text="clickThisStop" @click.stop="btnClick"></a>
+        <a :href="href" v-text="clickThisPrevent" @click.prevent="btnClick"></a>
+        <a :href="href" v-text="clickThisStopPrevent" @click.stop.prevent="btnClick"></a>
+        <form v-text="submitThisStopPrevent" @submit.stop.prevent="btnClick">
+        </form>
+        <input type="text" @keyUp.13="keyUpFun" v-model="keyUpFunVlaue">
+        <input type="text" @keyUp.enter="keyUpFun" v-model="keyUpFunVlaue">
+        <input type="text" @keyUp.delete="keyUpDeleteFun" v-model="keyUpFunVlaue">
+        <button v-text="changeCodesF1" @click="changeCodes"></button>
+    </div>
+    <script src=" vue2.0.js "></script>
+    <script>
+        var obj = {
+            href: 'www.baidu.com',
+            clickThisStop: '阻止冒泡',
+            clickThisPrevent: '阻止默认元素的默认行为',
+            clickThisStopPrevent: '阻止冒泡和默认行为',
+            submitThisStopPrevent: '阻止冒泡和默认submit提交事件',
+            keyUpFunVlaue: " ",
+            changeCodesF1: "这里不能使用-->Vue.directive('on').keyCodes.f1 = 112,要在Vue.config.keyCodes里添加Vue.config.keyCodes.f1=12;"
+        };
+        // 声名式渲染
+        var vm = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {
+                btnClick() {
+                    console.log(this);
+                },
+                keyUpFun() {
+                    console.log(this.keyUpFunVlaue)
+                },
+                keyUpDeleteFun() {
+                    this.keyUpFunVlaue = '';
+                },
+                changeCodes() {
+                    // Vue.directive('on').keyCodes.f1 = 112;
+                }
+
+            }
+
+        });
+        // vm.$mount('#app');//使用$mount查找#pp并绑定vue
+    </script>
+</body>
+
+</html>

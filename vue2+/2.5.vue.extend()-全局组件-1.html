@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>全局组件 Vue.extend({options...})</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用hello 子组件-->
+        <!-- <hello></hello> -->
+        <!-- <hello></hello> -->
+        <child></child>
+        <!-- <helloName></helloName>    -->
+    </div>
+    <!-- 创建摸版 -->
+    <template id="tmpl"> 
+    <ul >
+        <li>home</li>
+        <li>profile</li>
+        <li>concat</li>
+        <li>{{childName}}</li>
+    </ul>
+</template>
+    <script src="vue2.0.js"></script>
+    <script>
+        //把html取出来当作模板，用数据渲染好，将我们的组件扔到页面里
+        //用extend方法创建出组建,在实例创建前
+        var childTpl = Vue.extend({
+            //template就是组件的模板
+            template: "#tmpl",
+            data: function() { //这时data必须是个函数
+                return {
+                    childName: '这是childTpl-Name数据'
+                }
+            }
+        });
+        //注册组件 第一个参数是组件的名字，第二个参数是创建的组件
+        Vue.component('child', childTpl);
+        var vm = new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
+
+</html>

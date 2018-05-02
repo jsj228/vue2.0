@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件和数据交互</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--//这里是原本界面的data -->
+        <input type="text" v-model="data">
+        <!--//默认是单向数据流-->
+        <parent :msg.sync="data"></parent>
+    </div>
+
+    <template id="parentTpl">
+        <div>parent----{{msg}}</div>
+        <child></child>
+    </template>
+
+    <template id="childTpl">
+        <div>parent</div>
+        <p></p>
+    </template>
+    
+
+    <script src="vue2.0.js"></script>
+    <script>
+        //我们想传递数据  先从属性 传递到props  在从props取出来绑定到组件里
+        //:message="1" 是绑定的数字1
+        //message="1" 绑定的字符串1 只能传递字符串1
+        var childTpl=Vue.extend({template:'#childTpl'});
+        Vue.component('parent', {
+            template: '#parentTpl',
+            props: { //对属性进行验证
+                'msg': {
+                    type: [String], //只能传递字符串类型的
+                    default: function() {
+                        return 100 //默认值可以不符合type类型
+                    },
+                },
+            },
+            components:('child',childTpl),
+        });
+
+      
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                data: '外层数据'
+            }
+        });
+    </script>
+</body>
+
+</html>

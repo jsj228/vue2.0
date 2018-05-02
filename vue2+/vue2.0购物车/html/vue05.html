@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="myVue">
+    <ul>
+        <li v-for="arr in v_Arr">{{arr.name}}</li>
+    </ul>
+    <button v-on:click="btnClick">btnClick1</button>
+    <button @click="btnClick">btnClick2</button>
+    <div id="togoClass" v-show="a" style="width:100px;height: 50px;background:#00f;"></div>
+</div>
+<script>
+    var VM=new Vue({
+        el:'#myVue',
+        data:{
+            v_Arr:[
+                {name:'张三'},
+                {name:'张1'},
+                {name:'张0'},
+                {name:'张4'}
+            ],
+            a:true,
+        },
+        methods:{       //将#myVue控制范围内所有的方法封装在methods中
+          btnClick:function () {
+              console.log(VM.v_Arr.push({name:'jsj'}));
+              VM.a=!VM.a;
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

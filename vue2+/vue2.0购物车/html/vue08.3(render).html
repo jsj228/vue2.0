@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script src="../js/vue2.0.js"></script>
+<style>
+    .ulClass{color:#22cc00;}
+</style>
+<div id="myVue">
+    {{name}}
+    <anchored-heading :level="1">Hello world!</anchored-heading>  <!--   在 HTML 层， 我们决定这样定义组件接口：-->
+</div>
+<script>
+
+    var VM = new Vue({
+       el:'#myVue',
+        data:{name:'jsj', addClass:false,},
+        render:function(createElement){               //createElement('el',{attr},[childArr])
+            return createElement(
+                "ul",{
+                    class:{ulClass:true},          //判断class
+                    style:{fontSize:'50px'},       //添加style
+                    attrs:{id:'ulId', aa:'up'},    //添加自定义属性 // 添加id
+                    domProps:{innerHTML:'123'},    //给元素强制添加innerHTML  能够改变下边创建的标签
+                    on:{click:'elClickFun'},                  //添加事件
+                    props: {myProp: 'bar'},        //添加组件
+                },
+                 [
+                     createElement("li",1),
+                     createElement("li",2),
+                     createElement("li",3),
+                     createElement("li",4)
+                 ],
+                'bar'      //添加组件名称
+            );
+        },
+        components:{
+            'anchored-heading':{
+                render: function (createElement) {
+                    return createElement(
+                        'h' + this.level,   // tag name 标签名称
+                        this.$slots.default // 子组件中的阵列
+                    )
+                },
+                props: {
+                    level: {
+                        type: Number,
+                        required: true
+                    }
+                }
+            }
+        },
+        methods:{
+            elClickFun:function(){
+                alert(this);
+            }
+        }
+
+
+    });
+</script>
+
+</body>
+</html>

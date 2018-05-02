@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$event</title>
+</head>
+<body>
+<script src="../js/vue.js"></script>
+<div class="vMbox" @click="boxClick($event)" >
+    <button class="btn" @click.stop="btnClick()">{{btn}}</button>
+    <!--<button class="btn" @click="btnClick($event)">{{btn}}</button>-->
+</div>
+<script>
+    new Vue({
+       el:".vMbox",
+        data:{
+           btn:'$event',
+        },
+        methods:{
+           boxClick:function (e) {
+               e.cancelBubble=ture;
+               alert(11111);
+           },
+            btnClick:function (e) {
+                alert(222222);
+            }
+        }
+    });
+</script>
+</body>
+</html>

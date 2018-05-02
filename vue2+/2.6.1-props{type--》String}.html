@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>只有在父组件中才能调用的子组件</title>
+</head>b
+
+<body>
+    <div id="app">
+        <input type="text" v-model="message">
+       <!-- 使用parseInt将字符串数字隐式转换Number类型的数据====》就符合props中的数据类型 -->
+        <myprops :propsmsg="message"></myprops>  
+    </div>
+    <template id="myprops">
+        <div>
+            <li>00000--->{{propsmsg}}</li>
+            <li>123</li>
+        </div>
+    </template>
+    <script src="vue2.0.js "></script>
+    <script>
+        var propsTpl=Vue.extend({
+            // props:['propsmsg'],
+             props:{        
+                propsmsg:{    
+                  type:String,   
+                  required:true,    
+                  default:function(){
+                    alert('请输入数字')
+                  }
+                }
+              },
+            template:"#myprops"
+        });
+        Vue.component("myprops",propsTpl);
+
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                message:'5000',
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

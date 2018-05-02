@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue2.0.js"></script>
+</head>
+<body>
+<div id="myVue">
+    {{college}}
+    <button @click="clickfun">123</button>
+</div>
+<script>
+
+    app=new Vue({       //Vue首字母要大写
+        el:'#myVue',  //在Vue中使用el声明控制的el Id=myVue元素代码范围，id#myVue只能放置body内  在这里也可以使用class
+       data: {
+           college:13123,
+       },
+        methods:{
+//            clickfun(){alert(1111);}   //ES6   语法
+            clickfun:function(){alert(this.college);}
+        }
+
+    });
+
+</script>
+</body>
+</html>

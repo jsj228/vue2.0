@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>v-model-------->text</h2> trim-->去掉首尾空格
+        <input type="text" v-model.trim="name">
+        <p v-text="name"></p>
+        <h2>单选-------->rodio {{gender}}</h2>
+        <label><input type="radio" v-model="gender" value="男">男</label>
+        <label><input type="radio" v-model="gender" value="女">女</label>
+        <h2>单选-------->checkbox 单选 +checkboxData:''是string类型；checkbox 多选 +checkboxList:[]必须是数组<br>
+        </h2>
+        <p>多选----》({{checkboxList.join(',')}})</p>
+        <label><input type="checkbox" v-model="checkboxList" value="1">111111</label>
+        <label><input type="checkbox" v-model="checkboxList" value="2">222222</label>
+        <label><input type="checkbox" v-model="checkboxList" value="3">33333</label>
+        <label><input type="checkbox" v-model="checkboxList" value="4">44444</label>
+        <h2>v-model-------->select 单选 +selected:'' <br> ----->select 多选 +multiple+selectedList:[] <br>
+        </h2>
+        <select v-model="selectedList" multiple>
+                <option selected>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+        <button @click="btnClick">btn</button>
+    </div>
+    <script src="vue2.0.js"></script>
+    <script>
+        var obj = {
+            name: 'jsj  ',
+            gender: '男',
+            checkboxData: "", //选一个
+            checkboxList: [], //checkboxList必须是数组 //选一个
+            selected: "", //选一个
+            selectedList: [] //选多个
+        };
+        // 声名式渲染
+        var vm = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {
+                btnClick() {
+                    console.log(this.name);
+                    console.log(this.selectedList);
+                }
+            }
+
+        });
+        // vm.$mount('#app');//使用$mount查找#pp并绑定vue 
+        console.log(vm);
+        console.log(vm.gender);
+        console.log(vm.$data);
+    </script>
+</body>
+
+</htm

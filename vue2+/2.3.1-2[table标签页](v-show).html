@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-if,v-else,v-show,v-for</title>
+    <style>
+        .active {
+            color: #f0f;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <li v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" @click="thisShow(index)" :class="itme.active"></li>
+        <div v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" v-show="itme.active"></div>
+    </div>
+    <script src="vue2.0.js"></script>
+    <script>
+        var obj = {
+            vFor: [{
+                id: "id1",
+                active: 'active'
+            }, {
+                id: "id2",
+                active: ''
+            }, {
+                id: "id3",
+                active: ''
+            }, {
+                id: "id4",
+                active: ''
+            }],
+        };
+        // 声名式渲染
+        var vm = new Vue({
+            el: '#app',
+            data: obj,
+            methods: {
+                thisShow: function(i) {
+                    for (var n = 0; n < this.vFor.length; n++) {
+                        this.vFor[n].active = "";
+                    }
+                    console.log(this.vFor[i].active = "active");
+                }
+            }
+
+        });
+        // vm.$mount('#app');//使用$mount查找#pp并绑定vue
+    </script>
+</body>
+
+</html>

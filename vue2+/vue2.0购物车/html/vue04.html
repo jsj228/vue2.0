@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="myVue">
+    <ul>
+        <li v-for="arr in v_Arr">{{arr.name}} </li>
+    <br>
+
+    <li v-for="(vue,key) in v_Arr">{{vue}}{{key}}</li>
+    <hr>
+    <li v-for="(jsons,key) in json">{{jsons}}{{key}}</li>
+    <hr>
+    <li v-for="jsons in json">{{jsons}}{{$key}}</li>
+</div>
+<script>
+    var spp=new Vue({
+        el:'#myVue',
+        data:{
+            v_Arr:[{name:'张三'},{name:'张1'},{name:'张0'},{name:'张4'}],
+            v_Ar:['张三','张1','张0','张4'],
+            json:{aaa:'张0',ccc:'张1',ddd:'张三'},
+        }
+    });
+</script>
+</body>
+</html>

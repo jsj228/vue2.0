@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能社——http://www.zhinengshe.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="../js/vue2.0.js"></script> 
+</head>
+<body>
+     <script>
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+
+                },
+                methods:{
+                    fun:function(e){
+                        console.log(e.keyCode);
+                    },
+                    funEnter:function(e){
+                        switch(e.keyCode){
+                            case 13:alert('enter');break;
+                            case 37:alert('left');break;
+                            case 39:alert('right');break;
+                            case 38:alert('up');break;
+                            case 40:alert('down');break;
+                        }
+                        // alert(e.keyCode);
+                    }
+                }
+            })
+        };
+    </script>
+    <div id="box">
+        keydown <input type="text" @keydown="fun($event)"><br>
+        keyUp <input type="text" @keyUp="fun($event)">  <br>
+        
+        keydown.13<input type="text" @keydown.13="funEnter($event)"><br>
+        keydown.enter<input type="text" @keydown.enter="funEnter($event)"><br>
+        
+        keydown.left<input type="text" @keydown.left="funEnter($event)"><br>
+        keydown.right<input type="text" @keydown.right="funEnter($event)"><br>
+        
+        keydown.up<input type="text" @keydown.up="funEnter($event)"><br>
+        keydown.down<input type="text" @keydown.down="funEnter($event)"><br>
+    </div>
+   
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

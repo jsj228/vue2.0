@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+  
+        [bb]{width: 100px;height: 100px; background: red}
+        .active{color:#f00;}
+    </style>
+</head>
+<body>
+    <script src="vue2.0.js"></script>
+<div bb></div>
+<!--[]是属性选择器-->
+<div id="app">
+    <!--{{name}}-->
+   
+    <input v-model="name">
+     <!--防止闪烁-->
+    <div v-text="name"></div>
+    <!-- v-once只渲染一次 -->
+    <h2 v-once>{{name}}</h2>
+    <!--防止闪烁的情况下渲染html-->
+    <div v-html="v_html"></div>
+
+    <!--里面的内容都不会闪烁-->
+</div>
+
+<script>
+    var vm = new Vue({
+        data:{
+            name:'v-once',
+            v_html:'<h1 class="active">v-html<h1>'
+
+        }
+    });
+    vm.$mount('#app');
+</script>
+</body>
+</html>
