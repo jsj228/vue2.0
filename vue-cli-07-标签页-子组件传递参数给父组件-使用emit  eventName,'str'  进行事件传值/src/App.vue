@@ -43,6 +43,7 @@ export default {
     fox,
     other,
  },
+  // events:{
   methods:{
     changeMainDiv(e){  
       console.log(e);

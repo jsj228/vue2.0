@@ -21,7 +21,6 @@
     <script src="vue2.0.js "></script>
     <script>
         var propsTpl=Vue.extend({
-            // props:['propsmsg'],
              props:{        
                 propsmsg:{    
                   type:String,   
@@ -33,6 +32,7 @@
               },
             template:"#myprops"
         });
+        
         Vue.component("myprops",propsTpl);
 
         var vm = new Vue({

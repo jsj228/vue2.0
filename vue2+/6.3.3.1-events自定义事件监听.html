@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>只有在父组件中才能调用的子组件</title>
-</head>b
-
+</head>
 <body>
     <div id="app">
         <input type="text" v-model="parentMsgText">
@@ -17,7 +16,7 @@
         <div>
             <h1>这里是父组件--{{parentmsg}}</h1>   
             <!-- ③在parent组件内，给child子组件绑定childmsg属性,并将parent组件接受的parentmsg传递给child组件 -->
-            <child :childmsg="parentmsg"></child>     
+            <child :childmsg="parentmsg"  @click="eventName(msg)"></child> 
         </div>
     </template>
 
@@ -25,7 +24,9 @@
         <ul >
             <li>使用传递的childmsg数据<b v-text="childmsg"></b></li>  
             <li>子组件数据 {{childName}}</li>
+
             <li>子组件-<b v-text="text"></b></li>
+            <button @click="childFun(childName)" v-text="childName"></button>
         </ul>
     </template>
     <script src="vue2.0.js "></script>
@@ -42,6 +43,12 @@
                     text: '子组件--只有在父组件中才能调用',
                 }
             },
+            methods:{
+            	childFun(childMsg){
+            		// console.log(childMsg);
+            		this.$emit('eventName',childMsg);//Ⅰ-在子组件中这样定义$emit('eventName','childMsg')
+            	}
+            }
 
         });
         //注册组件 第一个参数是组件的名字，第二个参数是创建的组件
@@ -50,6 +57,12 @@
                 props: ['parentmsg'], //②在parent组件内，使用props接受最外层的parentmsg数据
                 template:"#parentEl",
                 components: { 'child': childTpl, },//在parent组件内，注册child子组件
+               // Ⅱ,在events对象中定义子组件中对应的事件方法
+               methods:{
+               		'eventName':function(msg){
+               			console.log(msg);
+               		}
+               }
             })
             // 注册父组件
         Vue.component('parent', parentTpl);
