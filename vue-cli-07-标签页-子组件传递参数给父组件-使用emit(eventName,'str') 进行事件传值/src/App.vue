@@ -12,6 +12,7 @@
       is 特性动态绑定子组件
       keep-alive 将切换出去的组件保留在内存中 -->
       <!--<5>自定义main的子组件放置的容器-->
+      <!-- 使用keep-alive属性或是使用keep-alive包裹起来，都是为了保持激活组件的渲染-->
       <mainChilds :is="currentTab" keep-alive></mainChilds> 
     <footer-tage></footer-tage>     <!--③使用局部组件main-tage-->
   </div>
@@ -28,12 +29,14 @@ export default {
   name: 'app',
   data(){ //【4】定义mainList数据
       return {
-      mainList:[
-        {id:'prince',name:'1111',},
-        {id:'rose',name:'2222',},
-        {id:'fox',name:'3333',},
-        {id:'other',name:'4444',},
-      ],
+      mainList:{
+        navBar:[  {id:'prince',name:'1111',class:'barActive'},
+        {id:'rose',name:'2222',class:''},
+        {id:'fox',name:'3333',class:''},
+        {id:'other',name:'4444',class:''},],
+        class:'barActive',
+      },
+      
       currentTab: 'prince' //设置开始打开的子组件
     }
   },
@@ -43,7 +46,6 @@ export default {
     fox,
     other,
  },
-  // events:{
   methods:{
     changeMainDiv(e){  
       console.log(e);

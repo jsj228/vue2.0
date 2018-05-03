@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>只有在父组件中才能调用的子组件</title>
+</head>
+
+<body>
+    <div id="app">
+        <comp-a></comp-a>
+        <comp-b></comp-b>
+    </div>
+    <!-- 创建摸版 -->
+
+    <script src="vue2.0.js "></script>
+    <script>
+        var bus = new Vue(); //声明一个单独的（bus）vue对象，来简单处理事件触发机制;
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                compA: {
+                    template: `<div>
+        				<input type="text" v-model="name">
+        				<button @click="creatFun">添加</button>
+        				</div>`,
+                    data: function() {
+                        return {
+                            name: ''
+                        }
+                    },
+                    methods: {
+                        creatFun() {
+                            bus.$emit('creatFun', { //使用$emit函数，来传递要出发的是那个事件方法，
+                                name: this.name //以及传递要监听的参数
+                            });
+                            this.name = ''
+                        }
+                    }
+                },
+                compB: {
+                    template: `<ul>
+        				<li v-for="item in items" v-text="item.name"></li>
+        				</ul>`,
+                    data: function() {
+                        return {
+                            items: [],
+                        }
+                    },
+                    mounted() { //mounted为vue2.0中新的生命周期函数
+                        var that = this;
+                        // console.log(this);
+                        // console.log(that);
+                        bus.$on('creatFun', function(data) {
+                            that.items.push(data);
+                        })
+                    }
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

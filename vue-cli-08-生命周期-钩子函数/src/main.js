@@ -34,7 +34,7 @@ new Vue({
     console.log("%c%s", "color:red", "data   : " + this.$data); //已被初始化  
     console.log("%c%s", "color:red", "message: " + this.message); //已被初始化  
   },
-  mounted: function () {
+  mounted: function () {//mounted为vue2.0中新的生命周期函数
     console.log("%c%s","color:#00f",'mounted 挂载结束后状态===============》');
     console.log("%c%s", "color:red", "el     : " + this.$el); //已被初始化
     console.log(this.$el);
