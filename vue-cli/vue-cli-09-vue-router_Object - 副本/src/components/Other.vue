@@ -1,17 +1,19 @@
 <template>
-  <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
+  <div id="Other">
     <h1>{{ msg }}</h1>
+    <!-- 都可以在非Home父组件中使用-->
+     <router-link to="/Home/child1">/Home/child1</router-link>
+     <router-link to="/Home/child2">/Home/child2</router-link>
+
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  // name: 'Other',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg: '这里是Other组件'
     }
   }
 }

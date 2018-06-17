@@ -1,8 +1,7 @@
 <template>
   <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
     <h1>{{ msg }}</h1>
+    <h2>Essential Links</h2>
   </div>
 </template>
 
@@ -11,7 +10,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg:"这里是Home组件"
     }
   }
 }

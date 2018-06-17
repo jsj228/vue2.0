@@ -1,17 +1,17 @@
 <template>
-  <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
+  <div class="Other">
     <h1>{{ msg }}</h1>
+    <h2>--------------</h2>
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Other',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg:"这里是Other模板"
     }
   }
 }

@@ -1,19 +1,18 @@
 <template>
-  <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
+  <div id="Other">
     <h1>{{ msg }}</h1>
+    <router-link :to="{ name: 'Users'}">跳转到Users路由下</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  // name: 'Other',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg: '这里是Other组件'
     }
-  }
+  },
 }
 </script>
 

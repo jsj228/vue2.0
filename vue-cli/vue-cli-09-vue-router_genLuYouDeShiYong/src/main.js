@@ -1,8 +1,11 @@
 import Vue from 'vue' //引入vue模块
 import Router from 'vue-router' //引入vue-router模块
 import App from './App' //引入App根组件
-import HelloWorld from './components/HelloWorld';
 import Home from './components/Home';
+import Users from './components/Users';
+import Other from './components/Other';
+import HelloWorld from './components/HelloWorld';
+
 Vue.config.productionTip = false
 
 Vue.use(Router);
@@ -11,8 +14,12 @@ const router = new Router({
   mode: 'history',
   base: __dirname,
   routes: [
+  // 在main.js中配置跟路由可以在任何中地方使用
     { path: '/', name: 'home', component: Home },//默认加载的组件
+    { path: '/Other', name: 'Other', component: Other }, //配置Other路由
+    
     { path: '/HelloWorld', name: 'HelloWorld', component: HelloWorld },
+    { path: '/Users', name: 'Users', component: Users }, //配置Users路由
   ]
 })
 

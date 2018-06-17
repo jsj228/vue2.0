@@ -2,10 +2,13 @@
   <div id="app">
     <h1>App.vue根组件</h1>
     <a href="/Home">Home</a>
-    <a href="/HelloWorld">HelloWorld</a>
     <router-link to="/">默认加载的组件--Home</router-link> 
-    <router-link to="/HelloWorld">HelloWorld</router-link>
+    <router-link to="/Other">Other组件</router-link>
     <router-view></router-view>
+    
+     <router-link to="/Home/child1">/Home/child1</router-link>
+     <router-link to="/Home/child2">/Home/child2</router-link>
+     <router-link :to="{ path:'/home/child1',query: { num:1}}">跳转到child1111路由下</router-link>
   </div>
 </template>
 

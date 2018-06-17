@@ -1,8 +1,11 @@
 import Vue from 'vue' //引入vue模块
 import Router from 'vue-router' //引入vue-router模块
 import App from './App' //引入App根组件
-import HelloWorld from './components/HelloWorld';
+import Other from './components/Other';
+
 import Home from './components/Home';
+import child1 from './components/child1';
+import child2 from './components/child2';
 Vue.config.productionTip = false
 
 Vue.use(Router);
@@ -11,8 +14,24 @@ const router = new Router({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', name: 'home', component: Home },//默认加载的组件
-    { path: '/HelloWorld', name: 'HelloWorld', component: HelloWorld },
+    { path: '/Other', name: 'Other', component: Other }, //配置Footer路由
+    {
+      path: '/Home/:id', component: Home,
+      children: [
+        {
+          // 当 /Home/:id/child1 匹配成功，
+          // child1 会被渲染在 Home 的 <router-view> 中
+          path: '',//默认加载的子路由
+          component: child1
+        },
+        {
+          // 当 /Home/:id/child2 匹配成功
+          // child2 会被渲染在 Home 的 <router-view> 中
+          path: 'posts',
+          component: child2
+        }
+      ]
+    }
   ]
 })
 

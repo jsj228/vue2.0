@@ -1,19 +1,17 @@
 <template>
-  <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
+  <div id="Footer">
     <h1>{{ msg }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  // name: 'Footer',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg: '这里是Footer组件'
     }
-  }
+  },
 }
 </script>
 

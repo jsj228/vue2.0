@@ -1,17 +1,16 @@
 <template>
-  <div class="hello">
-    HelloWorld
-    <h1>HelloWorld</h1>
-    <h1>{{ msg }}</h1>
+  <div id="child22">
+    <h1>{{ msg }} --------child222</h1>
+    <h2>name ---{{ $route.name}}</h2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'child22',
   data () {
     return {
-      msg: '这里是HelloWorld组件'
+      msg: '这里是child2222组件96'
     }
   }
 }
