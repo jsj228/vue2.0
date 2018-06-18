@@ -1,9 +1,13 @@
 <template>
   <header class="Header">
      <nav class="max1200"> 
-       <router-link to="/">Home</router-link>
+       <!-- <router-link to="/">Home</router-link>
        <router-link to="/Other">Other</router-link>
-       <router-link to="/childNavBar">childNavBar</router-link>
+       <router-link to="/childNavBar">childNavBar</router-link> -->
+       <!--换成json数据格式，当路径改变后就不用进行修改了,tag="li"将router-link标签渲染成li标签 -->
+       <router-link :to="{name:'Home'}" tag="li">Home</router-link>
+       <router-link :to="{name:'Other'}" tag="li">Other</router-link>
+       <!-- <router-link :to="{name:'childNavBar'}">childNavBar</router-link> -->
     </nav> 
   </header>
 </template>
@@ -19,7 +23,6 @@ export default {
 }
 </script>
 <style>
-
 header{background:#12a0ed;}
 nav{width:100%;line-height:60px}
 nav>a{display:inline-block;height:100%;color:#eee;padding:0 10px;transition:all 1s;}
@@ -39,7 +42,7 @@ a:hover,.router-link-exact-active{background:#d61324;color:#eee;}
 .max1200 {max-width: 1200px;margin: 0 auto;} */
 </style>
 <!-- 使用style src属性引入外部样式-->
-<style src="../css/common.css"></style>
+<style src="../../css/common.css"></style>
 
 
 

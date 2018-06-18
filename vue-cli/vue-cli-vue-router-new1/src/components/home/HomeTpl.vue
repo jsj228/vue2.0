@@ -14,8 +14,8 @@
             <router-link to="/homeAside1_Router2">child222</router-link>
             <router-link to="/homeAside1_Router3">child333</router-link>
         </aside>
-      <router-view class ="Aside1"/>
-      <router-view name="homeAside1" class="Aside1"/>
+      <router-view class ="aaa1"/>
+      <router-view name="homeAside1" class="aaa2"/>
     </div>
      <div class="HomeAside">
         <h1>这里是homeAside2组件模块</h1>
