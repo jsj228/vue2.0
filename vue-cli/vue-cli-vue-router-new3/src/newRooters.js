@@ -34,43 +34,13 @@ export default new VueRouter({
             name: 'Home', 
             component: HomeTpl,
             	children: [
-            		{
-            			path: '/',//设置子路由默认显示的
-            			component:homeAside1_RouterTpl1
-            		}, {
-            			path: 'homeAside1_Router2',
-            			components: {
-            				default: homeAside1_RouterTpl2_1,
-            				helper1: homeAside1_RouterTpl2_2
-            			}
+            		{path: '/',component:homeAside1_RouterTpl1},
+            		{path: 'homeAside1_Router2',
+            			components: {default: homeAside1_RouterTpl2_1,helper1: homeAside1_RouterTpl2_2}
             		},
-            		{
-            			path: 'homeAside1_Router3',//设置子路由默认显示的
-            			component: homeAside1_RouterTpl3
-            		},
+            		{path: 'homeAside1_Router3',component: homeAside1_RouterTpl3},
             	],
         },
-        // {
-        // 	path: '/',
-        // 	name: 'homeAside2',
-        // 	component: HomeTpl,
-        // 		children: [
-        // 		  {
-        // 			  path: '/',//设置子路由默认显示的
-        // 			  component: homeAside2_RouterTpl1
-        // 		  }, {
-        // 			  path: 'homeAside2_Router2',
-        // 			  components: {
-        // 				  default: homeAside2_RouterTpl2_1,
-        // 				  helper2: homeAside2_RouterTpl2_2
-        // 			  }
-        // 		  },
-        // 		  {
-        // 			  path: 'homeAside2_Router3',//设置子路由默认显示的
-        // 			  component: homeAside2_RouterTpl3_1
-        // 		  },
-        // 	]
-        // },
         { path: '/other', name: 'Other', component: otherTpl },
     ]
 })
