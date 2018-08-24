@@ -11,6 +11,7 @@ import mainTpl from "./components/main/mainTpl";
     import shoppingCartTpl from "./components/main/shoppingCartTpl";
     import meTpl from "./components/main/meTpl";
 // 公用的模板组件
+
 import otherTpl from "./components/otherTpl";
 import userLoginTpl from './components/common/userLoginTpl';
 import userRegisterTpl from './components/common/userRegisterTpl';
@@ -32,7 +33,7 @@ Vue.use(VueRouter); //初始化路由
 export default new VueRouter({
     // 修改默认激活的class
     linkActiveClass: 'active',
-    mode: 'history',
+    // mode: 'history',
     routes: [
         // '/'是默认加载的home路由
         {

@@ -7,8 +7,8 @@
     background: none;
     font: 16px 'Avenir', Helvetica, Arial, sans-serif;
     box-sizing: border-box;
+    list-style:none;
 }
-
 .active {
     background: #e3493c;
     color: #eee;
@@ -28,17 +28,16 @@
     display: inline-block;
     vertical-align: top;
 }
-
 .inlineBlcokB {
     display: inline-block;
     vertical-align: bottom;
 }
-
 .max1200 {
     max-width: 1200px;
     margin: 0 auto;
 }
-
 img {
     width: 100%;
 }
+.footerNavBar{position:fixed;left:0;right:0;bottom:0;width:100%;display:flex;justify-content: space-around;height:60px;}
+.footerNavBar>li{align-items:center}

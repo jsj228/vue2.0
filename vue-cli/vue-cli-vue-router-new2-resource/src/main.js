@@ -3,6 +3,10 @@
 import Vue from 'vue';
 import App from './App'; //引入App根组件
 import router from './newRouters'; //引入newRooters.js
+import echarts from "echarts"; //给整个项目添加依赖包
+import "./css/common.css" //引入公共css
+import "./css/iconfont.css" //引入字体文件
+
 
 // npm i vue - resource - D
 import VueResource from "vue-resource";

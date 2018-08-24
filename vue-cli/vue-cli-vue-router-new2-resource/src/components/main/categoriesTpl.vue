@@ -1,30 +1,31 @@
 <template>
   <div class="categories">
-    <h1>{{categoriesMsg}}</h1>
-    <hr>
-
+   <kLIne-v></kLIne-v>
+    <!--图表内容区域，必须给 ECharts 容器本身指定高度。不然它会使用默认高度-->
   </div>
 </template>
 <script>
-
-
-
 //引入局部组件模板
+import kLIneTpl from "../common/klineTpl";//k线组件
+
 export default {
     name: 'categoriesName',
     data:()=>{
-            return {
-                categoriesMsg:'这里是categoriesTpl局部组件模块'
-            }
-    }
-    
+        return {
+            categoriesMsg:'这里是categoriesTpl局部组件模块'
+        }
+    },
+    mounted () {
+    },
+    beforeDestroy () {
+    },
+    methods: {
+    },
+    components:{ // 自定义局部组件
+    'kLIne-v':kLIneTpl,
+  },
 }
-
 </script>
 
 <style scoped>
-.categories{width:100%;height:300px;border:5px dashed #ddd;
-display:flex;
-align-items: center;
-justify-content: center;}
 </style>
