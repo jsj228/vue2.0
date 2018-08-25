@@ -1,11 +1,10 @@
 // 将路由部分抽取出来，方便以后维护
-import Vue from 'vue';
-import VueRouter from 'vue-router';//引入vue-router
 
-
+import Vue from 'vue';//①引入vue核心模块
+import VueRouter from 'vue-router';//引入vue-router模块
 
 // 引入相应的组件页面模板
-import mainTpl from "./components/main/mainTpl";
+import mainTpl from "./components/mainTpl";
     import HomeTpl from "./components/main/HomeTpl";
     import categoriesTpl from "./components/main/categoriesTpl";
     import shoppingCartTpl from "./components/main/shoppingCartTpl";
@@ -40,15 +39,18 @@ export default new VueRouter({
             path: '/',
             name: 'main', 
             component:mainTpl,
-            	children: [
+            	children: [ //主要导航路由
                     { path:'home', component:HomeTpl, name:'Home',
-                        children: [{ path: 'bannerLink', component: bannerLink, name:'bannerLink'}]
+                      children: [{ path: 'bannerLink', component: bannerLink, name:'bannerLink'}],
                     },
                     { path:'categories',component:categoriesTpl,name:'Categories'},
                     { path:'shoppingCart',component:shoppingCartTpl,name:'shoppingCart'},
             		{path:'me',component:meTpl,name:'Me'},
             	],
         },
+        //公用组件路由
+        // { path: '/bannerLink',name: 'bannerLink', component:  bannerLink },
+
         { path: '/other', name: 'Other', component: otherTpl },
         { path: '/userLogin', name: 'userLogin', component: userLoginTpl },
         { path: '/userRegister', name: 'userRegister', component: userRegisterTpl },

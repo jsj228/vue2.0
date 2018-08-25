@@ -3,7 +3,7 @@
     <h2>Home组件</h2>
     <h1>{{msg}}</h1>
     <!-- banner -->
-    <banner-v :slide="slides"></banner-v>
+    <banner-v :bannerList="bannerDate"></banner-v>
     <!-- 行业快讯 -->
     <announcement-v :announcement="announcement"></announcement-v>
     <!-- 新书上架 - 使用属性传数据给子组件；使用子组件中的onBookSelect自定义事件，并调用preview方法，$event参数接受子组件传过来的数据-->
@@ -23,7 +23,7 @@ export default {
     return {
       msg:'这里是Home组件模板',
       announcement:'',
-      slides:[],
+      bannerDate:[],
       lastesUpdated:[],
 			recommended:[]
     }
@@ -33,7 +33,7 @@ export default {
       // console.log(res)
       // console.log(res.body);
       this.announcement=res.body.announcement;
-      this.slides=res.body.slides;
+      this.bannerDate=res.body.bannerDate;
       this.lastesUpdated=res.body.lastesUpdated;
       this.recommended=res.body.recommended;
     },(response) => {
