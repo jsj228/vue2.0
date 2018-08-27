@@ -25,5 +25,5 @@ export default {
 </script>
 
 <style scoped>
-.me{width:100%;height:300px;border:5px dashed #ddd;}
+.me{width:100%;background:#ff0}
 </style>

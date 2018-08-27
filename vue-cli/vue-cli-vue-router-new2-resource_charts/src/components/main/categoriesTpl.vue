@@ -22,6 +22,5 @@ export default {
 </script>
 
 <style scoped>
-.categories{width:100%;border:5px dashed #ddd;
-}
+.categories{width:100%;;}
 </style>

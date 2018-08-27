@@ -24,10 +24,9 @@ export default {
     
 }
 </script>
-
 <style scoped>
 *{margin:0;padding:0;list-style:none;box-sizing:border-box;}
-.main{width:100%;border:2px dashed #ddd;}
+.main{width:100%;min-height:500px;background:#fff;}
 ul{display:flex;justify-content:space-around;align-items:center;position:fixed;bottom:0;left:0;background:#eee;width:100%;}
 li{line-height:50px;}
 .slide-fade-enter-active{transition:all 0.3s ease;}
