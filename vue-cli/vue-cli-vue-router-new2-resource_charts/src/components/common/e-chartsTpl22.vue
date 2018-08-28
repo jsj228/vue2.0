@@ -16,11 +16,12 @@
       return {
         chart: null,
         msg:"eCharts",
-        kData:[],
+        
       }
     },
-    methods: {
-        getLineData(){
+    computed:{
+        kData:function (){
+            let dataLine=[];
             // HTTP get -->/home.json
             this.$http.get('http://192.168.0.156:800/index.php').then((res) =>{
                     // console.dir(Object.prototype.toString.call(res.bodyText));
@@ -36,29 +37,31 @@
                         }
                         d=null;
                         console.dir(itime);
-                        console.log('len----'+this.kData.length)
-                        this.kData.push(itime);
+                        dataLine.push(itime);
                         // lineData(itime);
                     }
                 },(response) => {
                     // 响应错误回调;
                     alert('请求错误')
             });
-        },
+            return dataLine;
+        }
+    },
+    methods: {
         initChart () {
             // 基于准备好的dom，初始化echarts实例,移动端建议使用 svg模式
             this.chart = echarts.init(document.getElementById('echarts'), 'light', {renderer: 'svg'})
             this.chart.setOption(chartUtil.lineOption());
             chartUtil.lineData(this.kData);
-            console.log('kData len----'+this.kData.length)//0
+            console.log('kData len----'+this.kData)
             
             //图标根据窗口大小自动缩放
             // window.addEventListener("resize", this.chart.resize);
         },
     },
-    created: function() {
-        this.getLineData()
-    },
+    // created: function() {
+    //     this.getLineData()
+    // },
     mounted () {
       //初始化 ECharts 实例，不能在created生命周期内初始化，因为那时候DOM还没有渲染，是找不到元素的
       this.initChart();

@@ -81,10 +81,7 @@ export default {
     methods:{
         //获取k线数据
         getLineData(times){
-            this.$http.post("http://192.168.0.156:800/index.php",
-                // data => {this.$set('t',times);}
-                {'T':times}
-            ).then((res) =>{
+            this.$http.get('http://192.168.0.156:800/index.php?').then((res) =>{
                 // console.log(Object.prototype.toString.call(res.bodyText));
                 var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
                 for(var r=0;r<dataArr.length-1;r++){
@@ -94,6 +91,7 @@ export default {
                         d.getFullYear()+'-'+
                         parseInt(d.getMonth()+1)+'-'+d.getDate()
                         +'-'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+                        
                     d=null;
                     this.chartData.rows.push(itime);
                 }

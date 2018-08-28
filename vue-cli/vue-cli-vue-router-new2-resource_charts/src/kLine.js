@@ -2,10 +2,13 @@ var upColor = '#ec0000';
 var upBorderColor = '#8A0000';
 var downColor = '#00da3c';
 var downBorderColor = '#008F28';
-
-console.dir('0000'+this);
 // 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-var data=[];
+let data=[];
+// var data=[
+//     [1514014200,"60.00000000","200.00000000","200.00000000","195.00000000","195.00000000"],[1514014500,"50.00000000","195.00000000","201.00000000","195.00000000","201.00000000"]
+// ];
+
+
 var data0 = splitData(data);
 function splitData(rawData) {
     var categoryData = [];
@@ -220,10 +223,33 @@ var option = {
 
     ]
 };
+// export default class chartUtil {
 export default class chartUtil {
     static lineOption = () => {
-        // return option;
-        return {option:option,data:data}
-        
+        return option
     }
+    static lineData = (itime) => {
+        console.dir('itime-----'+itime);
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function lineData(itime){
+//     data.push(itime);
+//     console.dir('itime-----'+itime);
+//     console.dir('len-----'+data.length);
+// }

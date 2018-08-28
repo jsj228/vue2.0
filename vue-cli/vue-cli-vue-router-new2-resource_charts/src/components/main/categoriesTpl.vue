@@ -1,7 +1,7 @@
 <template>
   <div class="categories">
     <h5>{{categoriesMsg}}</h5>
-    <kLine-v></kLine-v>
+    <!-- <kLine-v></kLine-v> -->
   </div>
 </template>
 <script>
