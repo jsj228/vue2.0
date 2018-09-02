@@ -81,9 +81,7 @@ export default {
     methods:{
         //获取k线数据
         getLineData(times){
-            this.$http.post("http://192.168.0.156:800/index.php",
-                // data => {this.$set('t',times);}
-                {'T':times}
+            this.$http.post("http://192.168.42.124:800/index.php"
             ).then((res) =>{
                 // console.log(Object.prototype.toString.call(res.bodyText));
                 var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
@@ -96,8 +94,8 @@ export default {
                         +'-'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
                     d=null;
                     this.chartData.rows.push(itime);
+                    console.dir('itime----'+itime);
                 }
-                console.dir(this.chartData.rows)
             },(response) => {
                 // 响应错误回调;
                 alert('请求错误')
@@ -107,8 +105,6 @@ export default {
     created: function() {
       this.getLineData(30)//this指向实例dom
     },
-    
-
 }
 </script>
 <style>

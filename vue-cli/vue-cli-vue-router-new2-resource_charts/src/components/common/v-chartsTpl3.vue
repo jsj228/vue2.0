@@ -101,7 +101,6 @@ export default {
             });
         }
     },
-   
     // beforeCreate: function() {
     //   console.group('------beforeCreate创建前状态------');
     //   console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined
