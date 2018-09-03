@@ -3,7 +3,7 @@
     "announcement": "今日上架的图书全部8折优惠！",
     "bannerDate": [
         { "id": 1, "imgUrl": "./static/banner1.jpg", "href": "1111" },
-        { "id": 2, "imgUrl": "./static/banner2.jpg", "href": "22222" }
+        { "id": 2, "imgUrl": "./static/banner2.jpg", "href": "22222"}
     ],
     "lastesUpdated": [{
         "id": 1,

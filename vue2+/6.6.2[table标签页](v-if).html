@@ -13,24 +13,24 @@
 
 <body>
     <div id="app">
-        <li v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" @click="thisShow(index)" :class="itme.active"></li>
-        <div v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" v-if="itme.active"></div>
+        <li v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" @click="thisShow(index)" :class="itme.bgActive"></li>
+        <div v-for="(itme,index) in vFor" v-text="index+'----'+itme.id" v-if="itme.bgActive"></div>
     </div>
     <script src="vue2.0.js"></script>
     <script>
         var obj = {
             vFor: [{
                 id: "id1",
-                active: 'active'
+                bgActive: 'active'
             }, {
                 id: "id2",
-                active: ''
+                bgActive: ''
             }, {
                 id: "id3",
-                active: ''
+                bgActive: ''
             }, {
                 id: "id4",
-                active: ''
+                bgActive: ''
             }],
         };
         // 声名式渲染
@@ -40,9 +40,9 @@
             methods: {
                 thisShow: function(i) {
                     for (var n = 0; n < this.vFor.length; n++) {
-                        this.vFor[n].active = "";
+                        this.vFor[n].bgActive="";
                     }
-                    console.log(this.vFor[i].active = "active");
+                    console.log(this.vFor[i].bgActive = "active");
                 }
             }
 

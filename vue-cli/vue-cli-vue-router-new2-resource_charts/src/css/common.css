@@ -9,15 +9,14 @@
     box-sizing: border-box;
     list-style:none;
 }
-.active {
-    background: #e3493c;
-    color: #eee;
+.bgRedActive {
+    background: #e3493c!important;
 }
+button,.minBtn{background:#0075a9;color: #eee;text-align:center;}
+.minBtn{display:inline-block;padding:2px 3px;width:auto;height:21px;line-height:12px;font-size:12px;border-radius:3px;}
+.bg {background: rgba(14, 0, 141, 0.8)}
 
-;
-.bg {
-    background: rgba(10, 2, 82, 0.8)
-}
+
 
 .inlineBlcokM {
     display: inline-block;

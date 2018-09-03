@@ -22,7 +22,7 @@
     methods: {
         getLineData(){
             // HTTP get -->/home.json
-            this.$http.get('http://192.168.0.156:800/index.php').then((res) =>{
+            this.$http.get('http://192.168.0.156:800/index.php',data=>{T=30}).then((res) =>{
                     // console.dir(Object.prototype.toString.call(res.bodyText));
                     var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
                     for(var r=0;r<dataArr.length-1;r++){

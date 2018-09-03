@@ -4,38 +4,61 @@
             <select :style="{background:'url(/static/img/'+coinSelected+'.png)no-repeat 10px 20px'}" v-model="coinSelected" @change="getLineData(5,0)">
                 <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
             </select>
-            <button class="minBtn" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="getLineData(itime.value,index)" :class="itime.active"></button>
+            <!-- <button class="minBtn" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="getLineData(itime.value,index)" :class="itime.active"></button> -->
+            <label v-for="(itime,index) in minBtnData" class="minBtn">
+                <input type="radio" name="coin" :value="itime.value" @click="getLineData(btnSelect)" v-model="btnSelect">
+                {{itime.BtnText}}
+            </label>
         </span>
-        <ve-candle :data="chartData" :settings="chartSettings" :init-options="options"></ve-candle>
+        <ve-candle :data="chartData" :settings="chartSettings"></ve-candle>
     </div>    
 </template>
 <script>
 export default {
-    data () { 
-        this.options={
-            renderer:'svg'
-           
-        }
+    data () {
         this.chartSettings = {
-            
             // showDataZoom:true,//展示DataZoom控件
             // upColor:'#ff0',//上升color
             // downColor:'#e3493c',//下降color
             // MA: [1, 2, 3, 4],//移动平均线指标周期
-
-            // showMA: true,//显示MA
+            showMA: true,//显示MA
             // showVol: true,//显示成交量
             labelMap: {  //设置指标的别名
-                // MA5: 'MA5',
-                '日K':'',
+                MA5: 'MA5',
+                '日K':''+this.btnSelect,
             },
-            // legendName: {'日K':''},// 设置图表上方图例的别名
             showDataZoom: true,
             start:20,
             end: 100,
             // //digit:6,//设置数据类型为percent时保留的位数
             // dataType:'percent',// KMB、 percent、normal
             itemStyle:{//设置图表的样式
+                // color: { //设置阳线的渐变色
+                //     type: 'linear',
+                //     x: 0,
+                //     y: 0,
+                //     x2: 0,
+                //     y2: 1,
+                //     colorStops: [{
+                //         offset: 0, color: 'red' // 0% 处的颜色
+                //             }, {
+                //                 offset: 1, color: 'blue' // 100% 处的颜色
+                //             }],
+                //     globalCoord: false // 缺省为 false
+                // },
+                // color0:{//设置阴线的渐变色
+                //     type: 'linear',
+                //     x: 0,
+                //     y: 0,
+                //     x2: 0,
+                //     y2: 1,
+                //     colorStops: [{
+                //         offset: 0, color: '#fff' // 0% 处的颜色
+                //     }, {
+                //         offset: 1, color: '#000' // 100% 处的颜色
+                //     }],
+                //     globalCoord: false // 缺省为 false
+                // }
                 // borderWidth:1,
                 // borderColor:'#000',
                 // borderColor0:'#0ff',
@@ -43,17 +66,12 @@ export default {
                 //     shadowColor: 'rgba(0, 0, 0, 0.5)',
                 //     shadowBlur: 10
                 // },
-            },
-            emphasis:{
-                itemStyle:{
-                    large:true,//是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启
-                    largeThreshold:6000,//default 开启绘制优化的阈值。
-                    progressive:50000,//default 渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
-                    progressiveThreshold:10000,//default 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染
-                    progressiveChunkMode:'mod',//default 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
-                }
-           }
-           
+                // large:true,//是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启
+                // largeThreshold:6000,//default 开启绘制优化的阈值。
+                // progressive:50000,//default 渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
+                // progressiveThreshold:10000,//default 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染
+                // progressiveChunkMode:'mod',//default 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
+            }
         }
         return {
             minBtnData:[
@@ -84,6 +102,7 @@ export default {
                 active: ''
                 },
             ],
+            btnSelect:'5',
             coinSelected:'eth',
             coinList:['eth','etc','doge','btc','wc'],
             chartData:{
@@ -93,11 +112,8 @@ export default {
         }
     },
     methods:{
-        getLineData(times,index){
+        getLineData(times){
             console.log();
-            // 设置minBtn的按钮css
-            for (var n = 0; n < this.minBtnData.length; n++) {this.minBtnData[n].active="";}
-            this.minBtnData[index].active = "bgRedActive";
             //获取k线数据
             this.$http.get("http://192.168.0.156:800/index.php?T="+times+'&&coin='+this.coinSelected).then((res) =>{
                 var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
@@ -125,7 +141,8 @@ export default {
 </script>
 <style>
     .v-chartsBox{position: relative;margin-top:30px;}
-    .btnBox{position: absolute;top:0;z-index:2;display:flex;justify-content:center;align-items:center;width:100%;}
+    .btnBox{position: absolute;top:-24px;display:flex;justify-content:center;align-items:center;width:100%;}
     .btnBox select{background-size:20px;background:#ff0}
+    [type=radio]{display:none;}
     .minBtn{margin:0 2px;}
 </style>

@@ -6,10 +6,10 @@
       <router-view/>
     </transition>
     <ul class="footerNavBar">
-        <router-link :to="{name:'Home'}" tag="li">Home</router-link>
-        <router-link :to="{name:'Categories'}" tag="li">Categories</router-link>
-        <router-link :to="{name:'shoppingCart'}" tag="li">shoppingCart</router-link>
-        <router-link :to="{name:'Me'}" tag="li">Me</router-link>
+        <router-link class="minBtn bgRedActive" :to="{name:'Home'}" tag="li">Home</router-link>
+        <router-link class="minBtn" :to="{name:'Categories'}" tag="li">Categories</router-link>
+        <router-link class="minBtn" :to="{name:'shoppingCart'}" tag="li">shoppingCart</router-link>
+        <router-link class="minBtn" :to="{name:'Me'}" tag="li">Me</router-link>
     </ul>
   </div>
 </template>
