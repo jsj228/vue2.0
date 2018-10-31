@@ -120,7 +120,7 @@ var option = {
     series: [
         {
             name: '日K',
-            type: 'candlestick',
+            type: 'bar',
             data: data0.values,
             itemStyle: {
                 normal: {

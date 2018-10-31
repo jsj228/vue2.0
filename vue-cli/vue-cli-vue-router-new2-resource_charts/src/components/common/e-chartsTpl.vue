@@ -1,8 +1,17 @@
 <template>
    <div class = "chart">
-      <h3>{{ msg }}</h3>
-      <div id = "echarts" style = "height:300px"></div>
-    </div>
+
+    <span class="btnBox">
+        <select :style="{background:'url(/static/img/'+coinSelected+'.png)no-repeat 10px 20px'}" v-model="coinSelected" @change="lineFun(5,0)">
+            <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
+        </select>
+        <button class="minBtn" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="lineFun(itime.value,index)" :class="itime.active"></button>
+    </span>
+        <div id='myChart' ref="myChart"></div>
+
+     
+  </div>
+
 </template>
 <script>
   import echarts from 'echarts/lib/echarts'
@@ -11,67 +20,204 @@
   import 'echarts/lib/chart/candlestick'
   import chartUtil from '../../kLine'
   export default {
-    name: 'quotation',
+    name: 'echarts',
     data () {
-      return {
-        chart: null,
-        msg:"eCharts",
-        kData:[],
-      }
+        return {
+        minBtnData:[{
+            BtnText: "5分钟",
+            value:5,
+            active: 'bgRedActive'
+            },{
+            BtnText: "15分钟",
+            value:15,
+            active: ''
+            },{
+            BtnText: "30分钟",
+            value:30,
+            active: ''
+            },
+            {
+            BtnText: "1小时",
+            value:60,
+            active: ''
+            },{
+            BtnText: "6小时",
+            value:360,
+            active: ''
+            },{
+            BtnText: "日线",
+            value:360*4,
+            active: ''
+        },],
+        coinSelected:'eth',
+        coinList:['eth','etc','doge','btc','wc'],
+
+        lineData:[],
+        echartsOption: {
+            barMaxWidth:20,
+            barMinHeight:2,
+            large:true,
+            progressive:10000,
+            // title: {
+            //     text: '上证指数',
+            //     left: 0
+            // },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                }
+            },
+            legend: {
+                data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+            },
+            grid: {
+                left: '10%',
+                right: '10%',
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: [],
+                scale: true,
+                boundaryGap: false,
+                axisLine: { onZero: false },
+                splitLine: { show: false },
+                splitNumber: 20,
+                min: 'dataMin',
+                max: 'dataMax'
+            },
+            yAxis: {
+                scale: true,
+                splitArea: {
+                    show: true
+                }
+            },
+            dataZoom: [
+                {
+                    type: 'inside',
+                    start: 30,
+                    end: 70
+                },
+                {
+                    show: true,
+                    type: 'slider',
+                    y: '90%',
+                    start: 0,
+                    end: 75
+                }
+                ],
+            series: [
+                {
+                name: '日K',
+                type: 'k',
+                data: [],
+                itemStyle: {
+                    normal: {
+                        color: '#ec0000',
+                        color0: '#00da3c',
+                        borderColor: '#8A0000',
+                        borderColor0: '#008F28'
+                    }
+                },
+                markPoint: {
+                    label: {normal: { formatter: function (param) {return param != null ? Math.round(param.value) : ''}}},
+                    data: [
+                        {
+                            name: 'highest value',
+                            type: 'max',
+                            valueDim: 'highest'
+                        },
+                        {
+                        name: 'lowest value',
+                        type: 'min',
+                        valueDim: 'lowest'
+                        },
+                        {
+                        name: 'average value on close',
+                        type: 'average',
+                        valueDim: 'close'
+                        }
+                    ],
+                    tooltip: {
+                         formatter: function (param) {return param.name + '<br>' + (param.data.coord || '')}
+                    }
+                },
+                markLine: {
+                    symbol: ['none', 'none'],
+                    data: [
+                        [
+                            {
+                                name: 'from lowest to highest',
+                                type: 'min',
+                                valueDim: 'lowest',
+                                symbol: 'circle',
+                                symbolSize: 10,
+                                label: {
+                                normal: { show: false },
+                                emphasis: { show: false }
+                                }
+                            },
+                            {
+                                type: 'max',
+                                valueDim: 'highest',
+                                symbol: 'circle',
+                                symbolSize: 10,
+                                label: {
+                                    normal: { show: false },
+                                    emphasis: { show: false }
+                                }
+                            }
+                        ]
+                    ]
+                }
+                }
+            ]
+            }
+        }
+    },
+    created () {
+    },
+    mounted () { 
+        this.lineFun(5,0);
     },
     methods: {
-        getLineData(){
-            // HTTP get -->/home.json
-            this.$http.get('http://192.168.0.156:800/index.php',data=>{T=30}).then((res) =>{
-                    // console.dir(Object.prototype.toString.call(res.bodyText));
-                    var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
-                    for(var r=0;r<dataArr.length-1;r++){
-                        var itime=dataArr[r].split(/\,/);
-                        var d = new Date();
-                        for(var i=0;i<itime.length;i++){
-                            var d = new Date(parseFloat(itime[0]));
-                            itime[0]=
-                            d.getFullYear()+'-'+d.getMonth()+1+'-'+d.getDate()
-                            // +'-'+d.getHours()+'-'+d.getMinutes()+'-'+d.getSeconds();
-                        }
-                        d=null;
-                        console.dir(itime);
-                        console.log('len----'+this.kData.length)
-                        this.kData.push(itime);
-                        // lineData(itime);
-                    }
-                },(response) => {
-                    // 响应错误回调;
+        lineFun(times,index){
+            for (var n = 0; n < this.minBtnData.length; n++) {this.minBtnData[n].active="";}
+            this.minBtnData[index].active = "bgRedActive";
+
+            this.myChart = echarts.init(document.getElementById('myChart'))
+            this.$http.post("http://192.168.0.156:800/index.php?T="+times+'&&coin='+this.coinSelected).then((res) =>{
+                // console.log(Object.prototype.toString.call(res.bodyText));
+                var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
+                var categoryData=[];
+                for(var r=0;r<dataArr.length-1;r++){
+                    var itime=dataArr[r].split(/\,/);
+                    var d = new Date(parseFloat(itime[0]) * 1000);
+                    itime[0]=
+                        d.getFullYear()+'-'+
+                        parseInt(d.getMonth()+1)+'-'+d.getDate()
+                        +'-'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+                    d=null;
+                    this.lineData.push(itime);
+                   this.echartsOption.xAxis.data.push(itime.splice(0, 1)[0])
+                };
+                this.echartsOption.series[0].data = this.lineData;
+                
+                this.myChart.setOption(this.echartsOption);
+                },(err) => { // 响应错误回调;
                     alert('请求错误')
-            });
-        },
-        initChart () {
-            // 基于准备好的dom，初始化echarts实例,移动端建议使用 svg模式
-            this.chart = echarts.init(document.getElementById('echarts'), 'light', {renderer: 'svg'})
-            this.chart.setOption(chartUtil.lineOption());
-            chartUtil.lineData(this.kData);
-            console.log('kData len----'+this.kData.length)//0
-            
-            //图标根据窗口大小自动缩放
-            // window.addEventListener("resize", this.chart.resize);
-        },
-    },
-    created: function() {
-        this.getLineData()
-    },
-    mounted () {
-      //初始化 ECharts 实例，不能在created生命周期内初始化，因为那时候DOM还没有渲染，是找不到元素的
-      this.initChart();
-      
-    },
-    beforeDestroy () {
-      //组件销毁前先销毁 ECharts 实例
-      if (!this.chart) { return }
-      this.chart.dispose()
-      this.chart = null
+            })
+        }
+        
     }
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#myChart{
+  width: 70%;
+  height: 500px;
+  margin: 0 auto;
+}
 </style>
+        

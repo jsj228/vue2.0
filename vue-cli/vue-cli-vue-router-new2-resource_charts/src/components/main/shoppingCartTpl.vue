@@ -1,7 +1,7 @@
 <template>
   <div class="shoppingCart">
     <h5>{{shoppingCart}}</h5>
-    <h3>v-Kline</h3>
+    <h3>v-charts</h3>
     <v-Line></v-Line>
   </div>
 </template>

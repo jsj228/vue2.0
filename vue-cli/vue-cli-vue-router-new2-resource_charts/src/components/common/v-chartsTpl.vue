@@ -13,11 +13,9 @@
 export default {
     data () { 
         this.options={
-            renderer:'svg'
-           
+            renderer:'svg',
         }
         this.chartSettings = {
-            
             // showDataZoom:true,//展示DataZoom控件
             // upColor:'#ff0',//上升color
             // downColor:'#e3493c',//下降color
@@ -36,25 +34,30 @@ export default {
             // //digit:6,//设置数据类型为percent时保留的位数
             // dataType:'percent',// KMB、 percent、normal
             itemStyle:{//设置图表的样式
-                // borderWidth:1,
-                // borderColor:'#000',
-                // borderColor0:'#0ff',
+                borderWidth:0.1,
+                borderColor:'#00f',
+                borderColor0:'#0ff',
                 // shadowBlur:{
                 //     shadowColor: 'rgba(0, 0, 0, 0.5)',
                 //     shadowBlur: 10
                 // },
+                 
             },
             emphasis:{
+                barMaxWidth:10,
                 itemStyle:{
                     large:true,//是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启
                     largeThreshold:6000,//default 开启绘制优化的阈值。
                     progressive:50000,//default 渐进式渲染时每一帧绘制图形数量，设为 0 时不启用渐进式渲染，支持每个系列单独配置。
                     progressiveThreshold:10000,//default 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染
                     progressiveChunkMode:'mod',//default 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
-                }
+                },
+                
+            
            }
            
         }
+        // 设置数据
         return {
             minBtnData:[
                 {
@@ -94,7 +97,6 @@ export default {
     },
     methods:{
         getLineData(times,index){
-            console.log();
             // 设置minBtn的按钮css
             for (var n = 0; n < this.minBtnData.length; n++) {this.minBtnData[n].active="";}
             this.minBtnData[index].active = "bgRedActive";
@@ -105,13 +107,18 @@ export default {
                 for(var r=0;r<dataArr.length-1;r++){
                     var itime=dataArr[r].split(/\,/);
                     var d = new Date(parseFloat(itime[0]) * 1000);
-                    itime[0]=d.getFullYear()+'-'+
-                        parseInt(d.getMonth()+1)+'-'+d.getDate()
-                        +'-'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
-                    d=null;
+                    itime[0]= index==5?d.getFullYear()+'-'+parseInt(d.getMonth()+1)+'-'+d.getDate():d.getDate()
+                        +'/'+d.getHours()+':'+d.getMinutes();// +':'+d.getSeconds()
+                        
+                    // for(var i=1;i<itime.length;i++){
+                    //     itime[i]=parseFloat(itime[i])/100;
+                    //     // console.dir('itime[i]--type----'+Object.prototype.toString.call(itime[1]));
+                    //     // console.dir('itime[i]-----'+itime[1]);
+                    // }
                     this.chartData.rows.push(itime);
+                    d=null;
+                    
                 }
-                console.dir(this.chartData.rows)
             },(response) => {
                 // 响应错误回调;
                 alert('请求错误')
@@ -119,7 +126,7 @@ export default {
         }
     },
     created: function() {
-      this.getLineData(5,0)//this指向实例dom
+      this.getLineData(1,0)//this指向实例dom
     },
 }
 </script>
