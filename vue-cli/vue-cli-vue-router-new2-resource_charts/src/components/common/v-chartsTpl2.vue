@@ -52,6 +52,8 @@ export default {
                     progressiveThreshold:10000,//default 启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染
                     progressiveChunkMode:'mod',//default 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
                 },
+                
+            
            }
            
         }
@@ -88,7 +90,7 @@ export default {
             coinSelected:'eth',
             coinList:['eth','etc','doge','btc','wc'],
             chartData:{
-                columns: ['日期', '开盘', '收盘', '最低', '最高', '交易量'],
+                columns: ['日期', 'open', 'close', 'lowest', 'highest', 'vol'],
                 rows:[],
             }
         }
@@ -107,23 +109,26 @@ export default {
                     var d = new Date(parseFloat(itime[0]) * 1000);
                     itime[0]= index==5?d.getFullYear()+'-'+parseInt(d.getMonth()+1)+'-'+d.getDate():d.getDate()
                         +'/'+d.getHours()+':'+d.getMinutes();// +':'+d.getSeconds()
-                    //  //拼接K线数据 ： columns: ['日期', 'open', 'close', 'lowest', 'highest', 'vol'],
-                    this.chartData.rows.push([itime[1],itime[2],itime[5],itime[4],itime[3],itime[1]]);
-                    // this.chartData.rows.push(itime);
-                    // console.dir(itime)
+                    // for(var i=1;i<itime.length;i++){
+                    //     itime[i]=parseFloat(itime[i])/100;
+                    //     // console.dir('itime[i]--type----'+Object.prototype.toString.call(itime[1]));
+                    //     // console.dir('itime[i]-----'+itime[1]);
+                    // }
+                    this.chartData.rows.push(itime);
                     d=null;
-                }   
-            },(response) => {  // 响应错误回调;
+                }
+            },(response) => {
+                // 响应错误回调;
                 alert('请求错误')
             });
         }
     },
     created: function() {
-        this.getLineData(5,0)//this指向实例dom
+      this.getLineData(1,0)//this指向实例dom
     },
 }
 </script>
-<style scoped>
+<style>
     .v-chartsBox{position: relative;margin-top:30px;}
     .btnBox{position: absolute;top:0;z-index:2;display:flex;justify-content:center;align-items:center;width:100%;}
     .btnBox select{background-size:20px;background:#ff0}

@@ -1,24 +1,10 @@
 <template>
    <div class = "chart">
-
-    <span class="btnBox">
-        <select :style="{background:'url(/static/img/'+coinSelected+'.png)no-repeat 10px 20px'}" v-model="coinSelected" @change="lineFun(5,0)">
-            <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
-        </select>
-        <button class="minBtn" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="lineFun(itime.value,index)" :class="itime.active"></button>
-    </span>
         <div id='myChart' ref="myChart"></div>
-
-     
   </div>
-
 </template>
 <script>
   import echarts from 'echarts/lib/echarts'
-  import 'zrender/lib/svg/svg'
-  import 'echarts/lib/chart/line'
-  import 'echarts/lib/chart/candlestick'
-  import chartUtil from '../../kLine'
   export default {
     name: 'echarts',
     data () {
@@ -110,7 +96,7 @@
             series: [
                 {
                 name: '日K',
-                type: 'k',
+                type: 'candlestick',
                 data: [],
                 itemStyle: {
                     normal: {
@@ -183,27 +169,24 @@
     },
     methods: {
         lineFun(times,index){
+            // this.lineData=[];
             for (var n = 0; n < this.minBtnData.length; n++) {this.minBtnData[n].active="";}
             this.minBtnData[index].active = "bgRedActive";
-
-            this.myChart = echarts.init(document.getElementById('myChart'))
-            this.$http.post("http://192.168.0.156:800/index.php?T="+times+'&&coin='+this.coinSelected).then((res) =>{
-                // console.log(Object.prototype.toString.call(res.bodyText));
+            this.myChart = echarts.init(document.getElementById('myChart'));
+            this.$http.get("http://192.168.0.156:800/index.php?T="+times+'&&coin='+this.coinSelected).then((res) =>{
                 var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
-                var categoryData=[];
+                this.lineData=[];
                 for(var r=0;r<dataArr.length-1;r++){
                     var itime=dataArr[r].split(/\,/);
                     var d = new Date(parseFloat(itime[0]) * 1000);
-                    itime[0]=
-                        d.getFullYear()+'-'+
-                        parseInt(d.getMonth()+1)+'-'+d.getDate()
-                        +'-'+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+                    itime[0]=index==5?d.getFullYear()+'-'+parseInt(d.getMonth()+1)+'-'+d.getDate():d.getDate()
+                        +'/'+d.getHours()+':'+d.getMinutes();// +':'+d.getSeconds()
+                    
+                    this.lineData.push([itime[2],itime[5],itime[4],itime[3]]);
                     d=null;
-                    this.lineData.push(itime);
-                   this.echartsOption.xAxis.data.push(itime.splice(0, 1)[0])
+                   this.echartsOption.xAxis.data.push(itime.splice(0, 1)[0]);
                 };
                 this.echartsOption.series[0].data = this.lineData;
-                
                 this.myChart.setOption(this.echartsOption);
                 },(err) => { // 响应错误回调;
                     alert('请求错误')
