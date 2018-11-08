@@ -1,10 +1,22 @@
 {
-    "msg": "这里是Home组件模板",
+    "msg": "这里是Home组件数据",
     "announcement": "今日上架的图书全部8折优惠！",
+    "homeHeaderList":[
+       {"class":"login","text":"登陆","href":"/userLogin"},
+       {"class":"register","text":"注册","href":"/userRegister"},
+       {"class":"a1","text":"充值","href":"1111"},
+       {"class":"a1","text":"提现","href":"1111"},
+       {"class":"a1","text":"行情","href":"1111"},
+       {"class":"a1","text":"实名认证","href":"1111"},
+       {"class":"a1","text":"邀请朋友","href":"1111"},
+       {"class":"a1","text":"c2c交易","href":"1111"}
+       
+    ],
     "bannerDate": [
         { "id": 1, "imgUrl": "./static/banner1.jpg", "href": "1111" },
         { "id": 2, "imgUrl": "./static/banner2.jpg", "href": "22222"}
     ],
+    
     "lastesUpdated": [{
         "id": 1,
         "titile": "css3",

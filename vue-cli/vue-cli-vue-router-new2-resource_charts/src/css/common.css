@@ -9,15 +9,14 @@
     box-sizing: border-box;
     list-style:none;
 }
-.bgRedActive {
-    background: #e3493c!important;
+html,body{height:100%;}
+.bgRedActive,.bgRed{
+    background: #e3493c!important;color:#eee;
 }
-button,.minBtn{background:#0075a9;color: #eee;text-align:center;}
-.minBtn{display:inline-block;padding:2px 3px;width:auto;height:21px;line-height:12px;font-size:12px;border-radius:3px;}
-.bg {background: rgba(14, 0, 141, 0.8)}
-
-
-
+button,.minBtn,[type="button"]{text-align:center;width:auto;height:auto;display:inline-block;vertical-align:middle;border-radius:3px;font:14px "微软雅黑"}
+.bgGreen{background:#0075a9;color: #eee;}
+.minBtn{padding:3px 5px;margin:0 3px;}
+[type='radio'],[type="checkBox"]{vertical-align:middle;margin:0 3px;}
 .inlineBlcokM {
     display: inline-block;
     vertical-align: middle;
@@ -40,3 +39,4 @@ img {
 }
 .footerNavBar{position:fixed;left:0;right:0;bottom:0;width:100%;display:flex;justify-content: space-around;height:60px;}
 .footerNavBar>li{align-items:center}
+

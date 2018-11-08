@@ -1,5 +1,5 @@
 <template>
-  <button id="returnPage" @click="returnPage">返回</button>
+  <button id="returnPage" class="bgGreen"  @click="returnPage">返回</button>
 </template>
 <script>
 export default {
@@ -12,14 +12,14 @@ export default {
   methods:{
     returnPage:()=>{
       // this.$router.push('/home');
-       console.log(window.history)
-      // console.log(window.history.go('-1')); 
+	//   window.history
+	window.history.go('-1')
       //  window.history.length > 1? 
         // this.$router.go(-1)   //退回一步  类似window.history.go(n) 
         // :this.$router.push('/');  类似window.history.go(n) 
         //②使用编程路由跳转到Footer路由下
-         console.log(window.history.length)
-         console.log(this)
+        //  console.log(window.history.length)
+        //  console.log(this)
     }
   }
  

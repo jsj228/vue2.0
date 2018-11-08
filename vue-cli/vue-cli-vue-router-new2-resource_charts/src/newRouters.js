@@ -5,10 +5,11 @@ import VueRouter from 'vue-router';//引入vue-router模块
 
 // 引入相应的组件页面模板
 import mainTpl from "./components/mainTpl";
-    import HomeTpl from "./components/main/HomeTpl";
-    import categoriesTpl from "./components/main/categoriesTpl";
-    import shoppingCartTpl from "./components/main/shoppingCartTpl";
-    import meTpl from "./components/main/meTpl";
+    import HomeTpl from "./components/main/Home/HomeTpl";
+    import tradeTpl from "./components/main/trade/tradeTpl";
+    import friendTpl from "./components/main/friend/friendTpl";
+    import meTpl from "./components/main/me/meTpl";
+    import c2cTpl from "./components/main/c2c/c2cTpl";
 // 公用的模板组件
 import otherTpl from "./components/otherTpl";
 import userLoginTpl from './components/common/userLoginTpl';
@@ -42,14 +43,14 @@ export default new VueRouter({
                     { path:'home', component:HomeTpl, name:'Home',
                       children: [{ path: 'bannerLink', component: bannerLink, name:'bannerLink'}],
                     },
-                    { path:'categories',component:categoriesTpl,name:'Categories'},
-                    { path:'shoppingCart',component:shoppingCartTpl,name:'shoppingCart'},
+                    { path:'trade',component:tradeTpl,name:'trade'},
+                    { path:'friend',component:friendTpl,name:'friend'},
             		{path:'me',component:meTpl,name:'Me'},
+            		{path:'c2c',component:c2cTpl,name:'c2c'},
             	],
         },
         //公用组件路由
         // { path: '/bannerLink',name: 'bannerLink', component:  bannerLink },
-
         { path: '/other', name: 'Other', component: otherTpl },
         { path: '/userLogin', name: 'userLogin', component: userLoginTpl },
         { path: '/userRegister', name: 'userRegister', component: userRegisterTpl },

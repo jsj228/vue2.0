@@ -7,7 +7,7 @@
 </template>
 <script>
 //引入局部组件模板
-import v_kLineTpl from "../common/v-chartsTpl";
+import v_kLineTpl from "../../common/v-chartsTpl";
 
 export default {
     name: 'shoppingCartTpl',

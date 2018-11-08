@@ -80,7 +80,7 @@ export default {
 }
 </script>
 <style scoped>
-	.bannerBox,.swiper-slide{overflow:hidden;margin:20px 0;border:5px solid #fd0;}
+	.bannerBox,.swiper-slide{overflow:hidden;margin:10px 0 20px;}
 	h1{position: absolute;top:50%;left:50%;margin:-10% 0 0 -15%;}
 	img{width:100%;}
 	aside{float:left;width:20%;background:khaki;}

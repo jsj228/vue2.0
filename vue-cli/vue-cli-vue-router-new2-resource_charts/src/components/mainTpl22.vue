@@ -6,8 +6,8 @@
       <router-view/>
     </transition>
     <ul class="footerNavBar">
-        <router-link class="minBtn bgRedActive" :to="{name:'Home',params:{marketData:'123'}}" v-text="fNav.home"></router-link>
-        <router-link class="minBtn" :to="{name:'trade',query:{marketData}}"  tag="li"  v-text="fNav.trade"></router-link>
+        <router-link class="minBtn bgRedActive" :to="{name:'Home',query:{marketData}}" v-text="fNav.home"></router-link>
+        <router-link class="minBtn" :to="{name:'trade',query:{marketData}}" tag="li" v-text="fNav.trade"></router-link>
         <router-link class="minBtn" :to="{name:'c2c'}" tag="li" v-text="fNav.c2c"></router-link>
         <router-link class="minBtn" :to="{name:'friend'}" tag="li" v-text="fNav.friend"></router-link>
         <router-link class="minBtn" :to="{name:'Me'}" tag="li" v-text="fNav.me"></router-link>
@@ -23,30 +23,31 @@ export default {
 		  fNav:'',
           mainMsg:'',
           marketData:'',
+          msg:'000',
       }
     },
      beforeCreate() {
+        var  marketList='';
         this.$nextTick(()=>{
-            var  marketList='';
-            var xmlhttp=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
-            xmlhttp.onreadystatechange=function(){
-                xmlhttp.readyState==4 && xmlhttp.status==200?marketList=xmlhttp.responseText:console.log('mainTplEror');
-            }
-            xmlhttp.open("GET","http://192.168.0.156:800/homeMarket.php",false);
-            xmlhttp.send();
-            this.marketData=marketList;
+            console.log(this.msg);
+            this.$http.get('http://192.168.0.156:800/homeMarket.php').then((res) =>{
+                this.marketData=Object.prototype.toString.call(res.body.toString())
+            },(response) => {// 响应错误回调
+                alert('market数据请求错误')
+            },false);
         })
     },
     created(){// HTTP get -->/home.json
         this.$http.get('./static/data_json/main.json').then((res) =>{
 			this.fNav=res.body.fNav;
             this.mainMsg=res.body.msg;
-            console.log('marketList--46--'+this.marketData);
+            console.log('marketList----'+this.marketData);
         },(response) => {// 响应错误回调
             alert('nav数据请求错误')
-        },true);
+        },false);
     },
     mounted(){
+
    },
 }
 </script>

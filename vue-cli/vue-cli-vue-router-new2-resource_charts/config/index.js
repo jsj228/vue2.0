@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { //webpack之proxyTable设置跨域
+        '/api':{
+            target:'http://192.168.0.156:800',
+            changeOrigin:true,
+            pathRewrite:{
+                '^/api':'/'
+            }
+        }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
