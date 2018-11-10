@@ -1,16 +1,12 @@
 <template>
    <div class = "chart">
     <p class="btnBox">
-
-
-
        <h2>传的币种{{marketSd}} | 选择的币种{{coinSelected}}</h2>
         <img :src="'/static/img/'+coinSelected+'.png'" style="width:20px;height:20px;vertical-align:middle"/>
-        <select v-model="coinSelected" @change="lineFun(5,0)"> 
-            <!-- lineFun(times,index) -->
+        <select id="echartsMarket" v-model="coinSelected" @change="lineFun(5,coinSelected)" v-if="coinList.length"> 
             <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
         </select>
-        <button class="minBtn bgGreen" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="lineFun(itime.value,index)" :class="itime.active"></button>  
+        <button class="minBtn bgGreen" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="lineFun(itime.value,coinSelected,index)" :class="itime.active"></button>  
     </p>
     <div id='myChart'></div>
   </div>
@@ -37,7 +33,7 @@
             minBtnData:[{
                 BtnText: "5分钟",
                 value:5,
-                active: 'bgRedActive'
+                active: ''
                 },{
                 BtnText: "30分钟",
                 value:30,
@@ -52,8 +48,7 @@
                 value:360*4,
                 active: ''
             },],
-            coinSelected:'eth',
-            coinList:['eth','etc','doge','btc','wc','wcg'],
+            coinSelected:'wcg',
             colorList: ['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],//颜色
             labelFont:'bold 12px Sans-serif',
             echartsOption:{
@@ -249,10 +244,10 @@
         }
     },
     created () {
+      
     },
     mounted () { 
-        // this.lineFun(5,0);
-        this.lineFun(5,this.marketSd)
+        this.lineFun(5,this.marketSd);
     },
     methods: {
         calculateMA(dayCount,data) {
@@ -266,27 +261,22 @@
                 for (var r= 0; r< dayCount;r++) {
                     sum += parseFloat(data[i - r][1]);
                 }
-                // console.log(sum+'---',dayCount);
-                // console.log(sum/dayCount);
-
                 result.push((sum / dayCount).toFixed(2));
             }
             return result;
         },
         // 异步获取k线数据
-        lineFun(times,index){
-            for (var n = 0; n < this.minBtnData.length; n++) {this.minBtnData[n].active="";}
-            console.log(times,index);
-            // if(typeof index!='number'){  //判断是页面传过来的还是自己选择的
-            if(typeof index!='number'){  //判断是页面传过来的还是自己选择的
-                index=0;
-                this.coinSelected=this.marketSd;
-            }
-            this.minBtnData[index].active = "bgRed";
-            this.myChart = echarts.init(document.getElementById('myChart'))
-            this.$http.get("http://192.168.0.156:800/index.php/lineKFun?T="+times+'&&coin='+this.coinSelected).then((res) =>{
+        lineFun(times,index,i){
 
+                for (var n = 0; n < this.minBtnData.length; n++) { this.minBtnData[n].active="";}
+                i?i:i=0;
+                this.minBtnData[i].active= "bgRed";
+                // console.log(times,index,this.coinSelected,this.marketSd);
 
+                this.coinSelected=index;
+
+                this.myChart = echarts.init(document.getElementById('myChart'))
+                this.$http.get("http://192.168.0.156:800/index.php/lineKFun?T="+times+'&&coin='+this.coinSelected).then((res) =>{
                 var dataArr=res.bodyText.replace(/[[|\"|']/g,'').split(/\]/g);
                 //成交量
                 this.echartsOption.series[0].data=[];
@@ -316,11 +306,27 @@
                 this.echartsOption.series[3].data= this.calculateMA(10,this.echartsOption.series[1].data);
                 this.echartsOption.series[4].data= this.calculateMA(20,this.echartsOption.series[1].data);
                 this.myChart.setOption(this.echartsOption); 
+                
+                //子组件定义事件向父组件传值
+                this.$emit('childMarket',this.coinSelected);
+
             })
             
         }
         
+    },
+    computed:{
+        coinList(){ //计算属性获取币种市场
+            if(window.localStorage.marketData){
+                var marketData=JSON.parse(window.localStorage.marketData);
+                for(var i=0,arr=[];i<marketData.length;i++){
+                arr.push(marketData[i].name.replace(/(\_cny)/g,''));
+                }
+                return arr;
+            }
+        }
     }
+
 }
 </script>
 <style scoped>

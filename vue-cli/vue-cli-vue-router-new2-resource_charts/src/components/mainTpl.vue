@@ -6,44 +6,43 @@
       <router-view/>
     </transition>
     <ul class="footerNavBar">
-        <router-link class="minBtn bgRedActive" :to="{name:'Home',params:{marketData:'123'}}" v-text="fNav.home"></router-link>
-        <router-link class="minBtn" :to="{name:'trade',query:{marketData}}"  tag="li"  v-text="fNav.trade"></router-link>
+        <!-- 路由传参 -->
+        <!-- <router-link class="minBtn" :to="{name:'trade',query:{mainMsg}}" tag="li" v-text="fNav.trade"></router-link> -->
+        <router-link class="minBtn active" :to="{name:'Home'}"  tag="li" v-text="fNav.home"></router-link>
+        <router-link class="minBtn" :to="{name:'trade'}"   tag="li"   v-text="fNav.trade"></router-link>
         <router-link class="minBtn" :to="{name:'c2c'}" tag="li" v-text="fNav.c2c"></router-link>
         <router-link class="minBtn" :to="{name:'friend'}" tag="li" v-text="fNav.friend"></router-link>
         <router-link class="minBtn" :to="{name:'Me'}" tag="li" v-text="fNav.me"></router-link>
     </ul>
-
   </div>
 </template>
 <script>
 export default {
     name: 'mainName',
     data:()=>{
-      return {
-		  fNav:'',
-          mainMsg:'',
-          marketData:'',
-      }
+        return {
+            fNav:'',
+            mainMsg:'',
+        }
     },
-     beforeCreate() {
-        this.$nextTick(()=>{
-            var  marketList='';
-            var xmlhttp=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
-            xmlhttp.onreadystatechange=function(){
-                xmlhttp.readyState==4 && xmlhttp.status==200?marketList=xmlhttp.responseText:console.log('mainTplEror');
-            }
-            xmlhttp.open("GET","http://192.168.0.156:800/homeMarket.php",false);
-            xmlhttp.send();
-            this.marketData=marketList;
-        })
+     beforeCreate(){
+        //获取当前页面中的data数据 
+        // 方法一
+        // setTimeout(()=>{console.log(this.mainMsg)},1)
+        // 方法二
+        // this.$nextTick(()=>{ 
+            //市场数据
+            // this.$http.get('http://192.168.0.156:800/homeMarket.php').then((res) =>{
+            //    this.mainMarket=  res.bodyText.toString();
+            // })
+        // })
     },
     created(){// HTTP get -->/home.json
         this.$http.get('./static/data_json/main.json').then((res) =>{
 			this.fNav=res.body.fNav;
             this.mainMsg=res.body.msg;
-            console.log('marketList--46--'+this.marketData);
         },(response) => {// 响应错误回调
-            alert('nav数据请求错误')
+            alert('nav数据请求错误');
         },true);
     },
     mounted(){

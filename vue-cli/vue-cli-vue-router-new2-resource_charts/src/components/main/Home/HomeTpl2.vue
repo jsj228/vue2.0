@@ -4,8 +4,8 @@
     <banner-v :bannerList="bannerDate"></banner-v>
     <homeHeaderList :quickData="headerList" heading="快捷操作"></homeHeaderList>
     <!-- home接受数据 {{$route.query.marketData}} -->
-    <!-- <p>homeMarket==={{$route.query.mainMarket}}</p> -->
-    <homeMarket></homeMarket>
+    <!-- <p>homeMarket==={{$route.query.marketData}}</p> -->
+    <homeMarket :marketData="homeMarket"></homeMarket>
 
    <!-- 行业快讯 -->
     <!-- <announcement-v :announcement="announcement"></announcement-v> -->
@@ -32,6 +32,7 @@ export default {
             bannerDate:[],
             lastesUpdated:[],
             recommended:[],
+            homeMarket:'',
         }
     },
     components:{ // 自定义局部组件
@@ -42,7 +43,11 @@ export default {
         'booklist-v':bookListTpl,
     },
     created(){
-       
+        //市场数据
+        this.$http.get('http://192.168.0.156:800/homeMarket.php').then((res) =>{
+            this.homeMarket=res.bodyText.toString();
+            const  marketList=res.bodyText.toString();
+        })
 
         // HTTP get -->/home.json
         this.$http.get('../static/data_json/home.json').then((res) =>{

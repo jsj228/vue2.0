@@ -4,28 +4,21 @@
         <span  @click="()=>{this.ifSellBuy=!this.ifSellBuy}" :class={active:ifSellBuy}>买入</span>
         <span  @click="()=>{this.ifSellBuy=!this.ifSellBuy}" :class={active:!ifSellBuy}>卖出</span>
     </h1>
-    <img :src="'/static/img/'+marketSelected+'.png'" style="width:10px;height:10px;vertical-align:middle"/>    
-    <select  id="tradeMarket" v-model="marketSelected" @change="tradeMarketFun">
-        <option v-for="item in marketList" :value="item.name.replace(/(\_cny)/,'')">
-            <span>
-                <b v-text="item.name.replace(/(\_cny)/,'')"></b><br>
-                <s v-text="parseFloat(item.volume)"></s>
-            </span>
-            <b  v-text="parseFloat(item.new_price)"></b>
-            <span class="bgRed" v-text="parseFloat(item.change)"></span>
-        </option>
-    </select>
+   <tradeMarket-v :marketSd="marketSelected" @childMarket="getChildMarket"></tradeMarket-v>
+   
     <buy-v v-if="ifSellBuy"></buy-v>
     <sell-v v-if="!ifSellBuy"></sell-v>
+    
     <p>{{marketSelected}}</p>
+
     <!-- 子组件传过来的事件childMarket -->
-    <Echarts-v :marketSd="marketSelected" @childMarket="getChildMarket" ref="eMarket"></Echarts-v>
+    <Echarts-v :marketSd="marketSelected" @childMarket="getChildMarket"></Echarts-v>
   </div>
 </template>
 <script>
 //引入局部组件模板
 import e_charts from "../../common/e-chartsTpl";
-// import headerTpl from "./tradeHeader";
+import tradeMarketTpl from "./tradeMarket";
 import buyTpl from "./buyTpl";
 import sellTpl from "./sellTpl";
 
@@ -41,13 +34,12 @@ export default {
     },
     components:{ // 自定义局部组件
         'Echarts-v':e_charts,
-        // 'header-v':headerTpl,
+        'tradeMarket-v':tradeMarketTpl,
         'buy-v':buyTpl,
         'sell-v':sellTpl,
     },
     created() {
-  
-        this.marketSelected=this.GetQueryString('name')?this.GetQueryString('name'):'wc';
+        this.marketSelected=this.GetQueryString('name')?this.GetQueryString('name'):'wcg';
         
         if(window.localStorage){
             this.marketList=JSON.parse(window.localStorage.marketData);
@@ -67,11 +59,8 @@ export default {
         },
         getChildMarket(childMarket){
             this.marketSelected = childMarket;
+            console.log(msg)
         },
-        tradeMarketFun(){
-            // console.log(this.marketSelected);
-            this.$refs.eMarket.lineFun(5,this.marketSelected)
-        }
     }
 }
 </script>
