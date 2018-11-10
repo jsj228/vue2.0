@@ -1,16 +1,21 @@
 {
-  "name": "vue-cli",
+  "name": "vue-cli-09-vue-router",
   "version": "1.0.0",
-  "description": "vue-cli-test",
-  "author": "jsj",
+  "description": "A Vue.js project",
+  "author": "jsj188508 <jsj188508@sina.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node  build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "echarts": "^4.1.0",
+    "swiper": "^4.3.3",
+    "v-charts": "^1.17.10",
+    "vue": "^2.5.2",
+    "vue-jsonp": "^0.1.8",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -42,6 +47,8 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
+    "vue-resource": "^1.5.1",
+    "vue-socket.io": "^2.1.1-b",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.12.0",
@@ -57,5 +64,7 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".postcssrc.js",
+  "license": "ISC"
 }

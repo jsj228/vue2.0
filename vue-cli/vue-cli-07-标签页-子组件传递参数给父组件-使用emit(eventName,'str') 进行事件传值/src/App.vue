@@ -30,13 +30,13 @@ export default {
   data(){ //【4】定义mainList数据
       return {
       mainList:{
-        navBar:[  {id:'prince',name:'1111',class:'barActive'},
-        {id:'rose',name:'2222',class:''},
-        {id:'fox',name:'3333',class:''},
-        {id:'other',name:'4444',class:''},],
-        class:'barActive',
+        navBar:[  
+			{id:'prince',name:'1111',class:'barActive'},
+			{id:'rose',name:'2222',class:''},
+			{id:'fox',name:'3333',class:''},
+			{id:'other',name:'4444',class:''},],
+			class:'barActive',
       },
-      
       currentTab: 'prince' //设置开始打开的子组件
     }
   },
