@@ -13,9 +13,10 @@
             <button @click="clickPage('f')" v-if="activePage!=1">首页</button>
             <button @click="clickPage('l')"><</button>
             <span v-for="r in Math.ceil(pageSum/pageNum)-1">
-                <button v-if="activePage <= r*pageNum&&activePage>(r-1)*pageNum&&r<Math.ceil(pageSum/pageNum)" v-for="i in pageNum" v-text="i+( r - 1 )*pageNum"></button>
+                <button :class="{active:activePage== i+( r - 1 )*pageNum }" v-if="activePage <= r*pageNum&&activePage>(r-1)*pageNum&&r<Math.ceil(pageSum/pageNum)" 
+                    v-for="i in pageNum"  v-text="i+( r - 1 )*pageNum"></button>
             </span>
-            <button v-if="activePage>parseInt(pageSum/pageNum)*pageNum" v-for="i in parseInt(pageSum % pageNum)" v-text="i+parseInt(pageSum/pageNum)*pageNum">
+            <button :class="{active:activePage== i+parseInt(pageSum/pageNum)*pageNum }" v-if="activePage>parseInt(pageSum/pageNum)*pageNum" v-for="i in parseInt(pageSum % pageNum)" v-text="i+parseInt(pageSum/pageNum)*pageNum">
             </button>
             <span v-if="activePage<parseInt(pageSum/pageNum)*pageNum+1"><button>...</button><button v-text="pageSum"></button></span>
             <button @click="clickPage( 'r') ">></button>
@@ -60,6 +61,11 @@
     <style>
         button {
             padding: 5px 10px
+        }
+        
+        .active {
+            background: #e3493c;
+            color: #eee;
         }
     </style>
     </bod
