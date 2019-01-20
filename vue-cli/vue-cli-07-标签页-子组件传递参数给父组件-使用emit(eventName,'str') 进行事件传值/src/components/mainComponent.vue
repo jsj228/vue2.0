@@ -4,7 +4,7 @@
   	<ul> 
       <!--【7】使用数据-->  <!--<1>、绑定click事件-->  
      <li v-for="(li,key) in mainData.navBar" @click="toggleLi(li.id,key)" :class="li.class">
-       <b v-text="li.name" ></b>
+        <b v-text="li.name" ></b>
      </li> 
     </ul>
 

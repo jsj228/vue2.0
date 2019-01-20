@@ -17,6 +17,8 @@ import userRegisterTpl from './components/common/userRegisterTpl';
 import page404Tpl from './components/common/page404Tpl';//404页面
 // 一些子页面
 import bannerLink from "./components/main/Home/bannerLink"
+import buyTpl from "./components/main/trade/buyTpl"
+import sellTpl from "./components/main/trade/sellTpl"
 
 Vue.config.productionTip = false;
 // 引入公共组件,并注册全局组件
@@ -40,18 +42,20 @@ export default new VueRouter({
             name: 'main', 
             component:mainTpl,
             	children: [ //主要导航路由
-                    { path:'home', component:HomeTpl, name:'Home',
-                      children: [{ path: 'bannerLink', component: bannerLink, name:'bannerLink'}],
+                    { path:'home',component:HomeTpl, name:'Home'},
+                    { path:'trade',component:tradeTpl,name:'trade',
+                        // children: [{ path: '/other', name: 'Other', component: otherTpl }],
                     },
-                    { path:'trade',component:tradeTpl,name:'trade'},
                     { path:'friend',component:friendTpl,name:'friend'},
             		{path:'me',component:meTpl,name:'Me'},
-            		{path:'c2c',component:c2cTpl,name:'c2c'},
+                    {path:'c2c',component:c2cTpl,name:'c2c'},
+                    { path: '/buyTpl', name: 'buy', component: buyTpl },
+                    { path: '/sellTpl', name: 'sell', component: sellTpl }
             	],
         },
-        //公用组件路由
+        //公用路由组件
         // { path: '/bannerLink',name: 'bannerLink', component:  bannerLink },
-        { path: '/other', name: 'Other', component: otherTpl },
+        // { path: '/other', name: 'Other', component: otherTpl },
         { path: '/userLogin', name: 'userLogin', component: userLoginTpl },
         { path: '/userRegister', name: 'userRegister', component: userRegisterTpl },
         { path: '*', component: page404Tpl},//这个是在中webpack.dev.conf没有配置historyApiFallback的情况下设有的
