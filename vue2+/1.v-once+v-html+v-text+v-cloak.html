@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* []是属性选择器 */
+        
+        [bb] {
+            width: 100px;
+            height: 100px;
+            background: red
+        }
+        
+        .active {
+            color: #f00;
+        }
+        /* 使用v-cloak的html属性，等待数据信息加载出来后才会显示 */
+        
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <script src="vue2.0.js"></script>
+    <div bb></div>
+    <div id="app">
+        <!--{{name}}-->
+        <input v-model="name">
+        <!--防止闪烁-->
+        <div v-text="name"></div>
+        <!-- v-once只渲染一次 -->
+        <h2 v-once>{{name}}</h2>
+        <!--防止闪烁的情况下渲染html-->
+        <div v-html="v_html"></div>
+
+        <!--用火狐浏览器效果更佳，在页面加载之前进行alert函数，为了让用户体验更好所以使用V-CLOCK-->
+        <p v-cloak>等待渲染的v-cloak {{msg}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            data: {
+                name: 'v-once',
+                v_html: '<h1 class="active">v-html<h1>',
+                msg: "hellovue"
+            },
+            beforeMount: function() {
+                alert("确定执行")
+            }
+        });
+        vm.$mount('#app');
+    </script>
+</body>
+
+</html>
