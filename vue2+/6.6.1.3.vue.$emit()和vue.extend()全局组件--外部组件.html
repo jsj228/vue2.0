@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <world></world>
+        <world></world>  
+        <!-- ChildClick 不能加（）否则接受不到子组件传的值
+            当点击子组件时，机会立即会执行父组件中指定的ChildClick函数
+         -->
+        <outfile @parent_event="ChildClick">
+            <!--使用slot可以(根据父组件 name="header"的元素),动态插值， -->
+             <p slot="header">headerSolt</p>
+        </outfile>
+    </div>
+    <script src="vue2.0.js"></script>
+    <!-- 引入outfile组件 -->
+    <script src="out_file_component.js"></script>
+    <script>
+        //创建world组件
+        var world = Vue.extend({
+            template: '<div>world组件</div>' //template就是组件的模板
+        });
+        //注册组件 第一个参数是组件的名字，第二个参数是创建的组件
+        Vue.component('world', world);
+        var vm = new Vue({
+            el: '#app',
+            methods:{
+                ChildClick(n){
+                    console.log(n)
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

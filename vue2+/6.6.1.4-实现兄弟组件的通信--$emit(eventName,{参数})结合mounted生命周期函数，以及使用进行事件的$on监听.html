@@ -31,7 +31,7 @@
                     },
                     methods: {
                         creatFun() {
-                            bus.$emit('creatFun', { //使用$emit函数，来传递要出发的是那个事件方法，
+                            bus.$emit('creatFuns', { //使用$emit函数，来传递要出发的是那个事件方法，
                                 name: this.name //以及传递要监听的参数
                             });
                             this.name = ''
@@ -51,7 +51,7 @@
                         var that = this;
                         // console.log(this);
                         // console.log(that);
-                        bus.$on('creatFun', function(data) {
+                        bus.$on('creatFuns', function(data) {
                             that.items.push(data);
                         })
                     }
