@@ -1,0 +1,63 @@
+{
+    "msg": "这里是Home组件数据",
+    "announcement": "今日上架的图书全部8折优惠！",
+    "homeHeaderList":[
+       {"class":"login","text":"登陆","href":"/userLogin"},
+       {"class":"register","text":"注册","href":"/userRegister"},
+       {"class":"a1","text":"充值","href":"1111"},
+       {"class":"a1","text":"提现","href":"1111"},
+       {"class":"a1","text":"行情","href":"1111"},
+       {"class":"a1","text":"实名认证","href":"1111"},
+       {"class":"a1","text":"邀请朋友","href":"1111"},
+       {"class":"a1","text":"c2c交易","href":"1111"}
+       
+    ],
+    "bannerDate": [
+        { "id": 1, "imgUrl": "./static/banner1.jpg", "href": "1111" },
+        { "id": 2, "imgUrl": "./static/banner2.jpg", "href": "22222"}
+    ],
+    
+    "lastesUpdated": [{
+        "id": 1,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu1.png"
+    }, {
+        "id": 2,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu2.png"
+    }, {
+        "id": 3,
+        "titile": "Html5",
+        "authors": ["333", "3333333"],
+        "imgsrc": "./static/shu3.png"
+    }, {
+        "id": 4,
+        "titile": "css3/JS/Html5",
+        "authors": ["44444", "444"],
+        "imgsrc": "./static/shu4.png"
+    }],
+    "recommended": [{
+        "id": 1,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu1.png"
+    }, {
+        "id": 2,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu2.png"
+    }, {
+        "id": 3,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu1.png"
+    }, {
+        "id": 4,
+        "titile": "css3",
+        "authors": ["1111", "11111111"],
+        "imgsrc": "./static/shu2.png"
+    }]
+
+}
