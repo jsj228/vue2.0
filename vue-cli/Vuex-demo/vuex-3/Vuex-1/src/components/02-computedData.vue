@@ -1,6 +1,6 @@
 <template>
     <div id="product-list-two">
-        <h2>computedStore=={{computedStore}}</h2>
+        <h2>02-computedData=={{computedStore}}</h2>
     </div>
 </template>
 <script>
