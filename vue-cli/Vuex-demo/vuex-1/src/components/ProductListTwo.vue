@@ -18,7 +18,8 @@ export default {
     },
     data () {
         return {
-            products: this.$store.getters.saleProducts,//使用getters.saleProducts中的数据
+            //使用getters.saleProducts中的方法
+            products: this.$store.getters.saleProducts,
         }
     }
 }

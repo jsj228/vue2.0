@@ -1,20 +1,20 @@
 <template>
     <div id="product-list-one">
         <h2>Product List One 
-            <button @click="minusPrice">减少价格</button>    
-            <button @click="minusPriceAsync">异步减少价格</button>    
+            <!-- <button @click="minusPrice">减少价格</button>    
+            <button @click="minusPriceAsync">异步减少价格</button>     -->
         </h2>
         <ul>
-            <li v-for="product in products">
+            <!-- <li v-for="product in products">
                 <span class="name">{{ product.name }}</span>
                 <span class="price">${{ product.price }}</span>
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>
 
 <script>
- import { mapState, mapActions } from 'vuex';
+//  import { mapState, mapActions } from 'vuex';
 export default {
     // props: ['products'],
     data () {
@@ -23,39 +23,15 @@ export default {
         }
     },
     methods:{
-        minusPrice() {
-             this.$store.commit('minusPrice', 2);//调用store中的minusPrice 方法
-        },
-        minusPriceAsync() {
-            this.$store.dispatch('minusPriceAsync', 5); //dispatch分发actions中的minusPriceAsync这个异步函数
-        }
+        // minusPrice() {
+        //      this.$store.commit('minusPrice', 2);//调用store中的minusPrice 方法
+        // },
+        // minusPriceAsync() {
+        //     this.$store.dispatch('minusPriceAsync', 5); //dispatch分发actions中的minusPriceAsync这个异步函数
+        // }
     }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <style scoped>

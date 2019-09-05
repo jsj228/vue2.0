@@ -31,11 +31,13 @@
         <h2 v-once>{{name}}</h2>
         <!--防止闪烁的情况下渲染html-->
         <div v-html="v_html"></div>
-
         <!--里面的内容都不会闪烁-->
     </div>
 
-    <script>
+	<script>
+
+
+
         var vm = new Vue({
             data: {
                 name: 123,
@@ -43,6 +45,31 @@
         });
         vm.$mount('#app');
     </script>
+
+
+    <script>
+    //自定义过滤器	
+    // 外部文件开始
+		import Vue from 'vue';
+		let filterFuns = {
+		    // 删除_cnyx
+		    coin_replace: (coin) => {
+		        return coin ? coin.replace('_cnyx', '').toUpperCase() : '';
+		    },
+		    // 截取当前数据到小数点后两位
+		    numFilter2: (num) => {
+		        return num ? parseFloat(num).toFixed(2) : '';
+		    }
+
+		}
+		for (let key in filterFuns) {
+		    console.log(key);
+		    Vue.filter(key, filterFuns[key]);
+		}
+	// 外部文件结束
+	// 在main.js 中引用
+    </script>
+
 </body>
 
 </html>
