@@ -17,19 +17,11 @@ const router = new Router({
 })
 
 
-
 new Vue({
   el: '#app',
-  router,      //将路由挂载到html中
-  template: '<App/>',/*将组件挂载到html页面上*/
-  components: { App },
-})
-
-// // new Vue({
-// //   el: '#app',
-// //   router,
-// //   render: h => h(App)
-// // });
+  router,  //将路由挂载到html中
+  render: h => h(App)
+});
 
 // // ①在main.js中引入路由模块
 // // ->②在router > routerConfig.js中引入相应的模块和路由
