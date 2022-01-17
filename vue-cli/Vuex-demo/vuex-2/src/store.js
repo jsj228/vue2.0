@@ -5,7 +5,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     a: moduleA,
-    b: moduleB,
+    // b: moduleB,
   },
 });
 
