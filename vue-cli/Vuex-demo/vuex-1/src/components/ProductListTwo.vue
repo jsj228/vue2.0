@@ -1,16 +1,25 @@
 <template>
     <div id="product-list-two">
-        <h2>Product List Two</h2>
+        <h2>Product List Two   </h2>
+        
+        {{$store.state.products}}<br>
+        {{$store.getters.saleProducts}}
         <ul>
             <li v-for="product in products">
                 <span class="name">{{ product.name }}</span>
                 <span class="price">${{ product.price }}</span>
+              
             </li>
         </ul>
+        {{products2}}<br>
+        {{products3}}<br>
+        {{products4}}<br>
     </div>
 </template>
-
 <script>
+
+import {mapState} from 'vuex'
+//  count:state=>state.count
 export default {
     // props: ['products'],
     created() {
@@ -19,9 +28,26 @@ export default {
     data () {
         return {
             //使用getters.saleProducts中的方法
-            products: this.$store.getters.saleProducts,
+            products: this.$store.getters.saleProducts
         }
+    },
+    computed: mapState({
+        products2:state=>state.products,
+        products3:state=>state.products,
+        products4:state=>state.products
+    }),
+    computed:{
+        // ...mapState({
+        //     products3:state=>state.products,
+        //     products4:state=>state.products
+        // }),
+        // ...mapState({
+        //     indicatorPosition: state => state.PlayService.currentTime / state.PlayService.duration * 100,
+        //     playing: state => state.PlayService.playing,
+        //     song: state => state.PlayService.song
+        // })
     }
+   
 }
 </script>
 

@@ -4,12 +4,19 @@
             <button @click="minusPrice">减少价格</button>    
             <button @click="minusPriceAsync">异步减少价格</button>    
         </h2>
-        {{products}}
+        {{A_products}}
         <ul>
-            <!-- <li v-for="product in products">
-                <span class="name">{{ product.name }}</span>
-                <span class="price">${{ product.price }}</span>
-            </li> -->
+            <li v-for="(va,i) in A_products" :key="i">
+                <span class="name">{{ va.name }}</span>
+                <span class="price">${{ va.price }}</span>
+            </li>
+        </ul>
+        {{B_products}}
+        <ul>
+            <li v-for="(va,i) in B_products" :key="i">
+                <span class="name">{{ va.name }}</span>
+                <span class="price">${{ va.price }}</span>
+            </li>
         </ul>
     </div>
 </template>
@@ -18,27 +25,30 @@
  import { mapState, mapActions } from 'vuex';
 export default {
     // props: ['products'],
-    // data () {
-    //     return {
-    //          products : state => state.products.all
-    //         // products:this.$store.modules.a.state.products //获取store中state的数据
+    data () {
+        onsole.log()
+        return {
+            B_products :this.$store.state.moduleB._products
+        }
+    },
+    // computed:{
+    //     A_products:function(){
+    //         console.log(this.$store)
+    //         return this.$store.state.moduleA.products;
     //     }
     // },
-
-    computed: mapState({ products: state =>a.state.products}),
-    methods: mapActions('cart', ['addProductToCart']),
-    created () {this.$store.dispatch('products/getAllProducts')}
-        
-    
-    
-    // methods:{
-    //     minusPrice() {
-    //         // this.$store.modules.a.state.a.commit('minusPrice', 2); //提交`minusPrice,payload为2
-    //     },
-    //     minusPriceAsync() {
-    //         // this.$store.state.a.dispatch('minusPriceAsync', 5); //分发actions中的minusPriceAsync这个异步函数
-    //     }
-    // }
+    computed:mapState({ 
+        A_products:state=>state.moduleA.products,
+    }),
+    methods:{
+        minusPrice() {
+            console.log(this.$store)
+            this.$store.commit('minusPrice', 2); //提交`minusPrice,payload为2
+        },
+        minusPriceAsync() {
+            this.$store.dispatch('minusPriceAsync', 5); //分发actions中的minusPriceAsync这个异步函数
+        }
+    }
 
 }
 </script>

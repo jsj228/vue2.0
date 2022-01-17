@@ -2,10 +2,10 @@
     <div id="product-list-two">
         <h2>Product List Two</h2>
         <ul>
-            <li v-for="product in products">
+            <!-- <li v-for="product in products">
                 <span class="name">{{ product.name }}</span>
                 <span class="price">${{ product.price }}</span>
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>
@@ -18,7 +18,8 @@ export default {
     },
     data () {
         return {
-            products:this.$store.a.products //获取store中state的数据
+
+            // products:this.$store.a.products //获取store中state的数据
             // products: this.$store.state.products //获取store中state的数据
             // products:state => state.b,
             // this.$store.state.b.getters.saleProducts
