@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <h1>App.vue根组件</h1>
-    <a href="/Home">Home</a>
-    <a href="/HelloWorld">HelloWorld</a>
-    <router-link to="/">默认加载的组件--Home</router-link> 
-    <router-link to="/HelloWorld">HelloWorld</router-link>
+    <router-link to="/">默认加载的组件--Home</router-link>   <br>
+    <router-link to="/HelloWorld">HelloWorld</router-link>  <br>
+  
     <router-view></router-view>
   </div>
 </template>
