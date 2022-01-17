@@ -19,6 +19,6 @@ export default new VueRouter({
 
 // // ①引入路由模块
 // // ->②引入相应的模块和路由
-// // ->③定义好要使用的组件
-// // ->④引入并挂载到router中
+// // ->③定义好要使用的组件并引入路由中
+// // ->④在new Vue实例化时，挂载到router中  
 // // -> 在App.vue中使用 S< router - view />
