@@ -5,7 +5,7 @@
     <keep-alive>
       <router-view v-if="$route.meta.isCaches"/>
     </keep-alive>
-    <router-view/>
+    <router-view v-if="!$route.meta.isCaches"/>
     <!-- <footer-v></footer-v> -->
   </div>
 </template>
