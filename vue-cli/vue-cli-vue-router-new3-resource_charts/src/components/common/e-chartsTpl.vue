@@ -1,14 +1,15 @@
 <template>
    <div class = "chart">
-    <p class="btnBox">
-       <h2>传的币种{{marketSd}} | 选择的币种{{coinSelected}}</h2>
+    <div class="btnBox">
+        <h2>传的币种{{marketSd}} | 选择的币种{{coinSelected}}</h2>
         <img :src="'/static/img/'+coinSelected+'.png'" style="width:20px;height:20px;vertical-align:middle"/>
         <select v-model="coinSelected" @change="lineFun(5,0)" v-if="coinList.length"> 
             <!-- lineFun(times,index) -->
-            <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
+            <option  v-for="(itime,i) in coinList" :key="i" :value="itime" v-text="itime"></option>
         </select>
-        <button class="minBtn bgGreen" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="lineFun(itime.value,index)" :class="itime.active"></button>  
-    </p>
+        <button class="minBtn bgGreen" v-for="(itime,n) in minBtnData" :key="n" v-text="itime.BtnText" 
+        @click="lineFun(itime.value,index)" :class="itime.active"></button>  
+    </div>
     <div id='myChart'></div>
   </div>
 </template>

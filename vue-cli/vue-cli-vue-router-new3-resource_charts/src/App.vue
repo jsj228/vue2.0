@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <!-- <header-v></header-v> -->
+    <header-v></header-v>
+    {{ $route.meta.isCaches}}
+    <keep-alive>
+      <router-view v-if="$route.meta.isCaches"/>
+    </keep-alive>
     <router-view/>
     <!-- <footer-v></footer-v> -->
   </div>

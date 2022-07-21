@@ -4,7 +4,7 @@
 			<h2>市场行情</h2>
 		</header>
 		<div class="marketBox">
-            <p v-for="item in marketData" >
+            <p v-for="(item,i) in marketData" :key="i">
                 <img :src="'/static/img/'+item.name.replace(/(\_cny)/,'')+'.png'">
                 <span>
                    <b v-text="item.name.replace(/(\_cny)/,'')"></b><br>
@@ -31,11 +31,11 @@ export default {
             this.$http.get('http://192.168.0.156:800/homeMarket.php').then((res) =>{
                 this.marketData=JSON.parse(res.bodyText);
                 window.localStorage.marketData=res.bodyText;
-            },(response) => { // 响应错误回调
-                alert('请求错误');
+            },(err) => { // 响应错误回调
+                console.error(`请求错误:${err}`);
             });
         }else{
-            alert("浏览器不支持localstorage");
+            console.error("浏览器不支持localstorage");
             return false;
         }
     },

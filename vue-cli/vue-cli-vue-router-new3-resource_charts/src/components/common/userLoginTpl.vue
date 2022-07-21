@@ -21,7 +21,8 @@ export default {
   methods:{
 	  localStorageFun(){
 		if(!window.localStorage){
-            alert("浏览器不支持localstorage");
+            console.error("浏览器不支持localstorage");
+
         }else{
             var storage=window.localStorage;
             //写入a字段

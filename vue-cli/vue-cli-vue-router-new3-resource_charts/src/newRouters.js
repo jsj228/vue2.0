@@ -39,12 +39,12 @@ export default new VueRouter({
             name: 'main', 
             component:mainTpl,
             	children: [ //主要导航路由
-                    { path:'home', component:HomeTpl, name:'Home',
+                    { path:'home', component:HomeTpl, name:'Home', meta:{isCaches:false},
                       children: [{ path: 'bannerLink', component: bannerLink, name:'bannerLink'}],
                     },
-                    { path:'trade',component:tradeTpl,name:'trade'},
-                    { path:'shoppingCart',component:shoppingCartTpl,name:'shoppingCart'},
-            		{path:'me',component:meTpl,name:'Me'},
+                    { path:'trade',component:tradeTpl,name:'trade',meta:{isCaches:false}},
+                    { path:'shoppingCart',component:shoppingCartTpl,name:'shoppingCart', meta:{isCaches:true},},
+            		{path:'me',component:meTpl,name:'Me', meta:{isCaches:true},},
             	],
         },
         //公用组件路由

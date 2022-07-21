@@ -4,7 +4,7 @@
 			<h2>{{heading}}<span style="float:right" class="more">更多</span></h2>
 		</header>
 		<div class="headerBox">
-			<router-link v-for="item in quickData" :class="item.class" class="minBtn bgGreen" v-text="item.text" :to="{path:item.href}" tag="button"></router-link>
+			<router-link v-for="(item,i) in quickData" :key="i" :class="item.class" class="minBtn bgGreen" v-text="item.text" :to="{path:item.href}" tag="button"></router-link>
 		</div>
 	</div>
 </template>

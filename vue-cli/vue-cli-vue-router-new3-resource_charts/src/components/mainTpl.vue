@@ -25,12 +25,12 @@ export default {
     },
     created(){// HTTP get -->/home.json
  
-        this.$http.get('./static/data_json/main.json').then((res) =>{
-			this.fNav=res.body.fNav;
-			this.mainMsg=res.body.msg;
+      this.$http.get('./static/data_json/main.json').then((res) =>{
+        this.fNav=res.body.fNav;
+        this.mainMsg=res.body.msg;
 			// console.log(res.body.footerNav);
-        },(response) => {// 响应错误回调
-            alert('请求错误')
+        },(err) => {// 响应错误回调
+            console.error(`请求错误:${err}`)
         });
     },
 }

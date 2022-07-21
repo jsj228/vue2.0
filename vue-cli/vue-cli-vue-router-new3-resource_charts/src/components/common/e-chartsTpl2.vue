@@ -189,7 +189,7 @@
                 this.echartsOption.series[0].data = this.lineData;
                 this.myChart.setOption(this.echartsOption);
                 },(err) => { // 响应错误回调;
-                    alert('请求错误')
+                console.error(`请求错误:${err}`);
             })
         }
         

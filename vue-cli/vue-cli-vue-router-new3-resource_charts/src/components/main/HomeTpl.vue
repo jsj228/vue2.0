@@ -39,13 +39,12 @@ created(){// HTTP get -->/home.json
         this.announcement=res.body.announcement;
         this.lastesUpdated=res.body.lastesUpdated;
         this.recommended=res.body.recommended;
-    },(response) => { // 响应错误回调
-        alert('请求错误');
+    },(err) => { // 响应错误回调
+        console.error(`请求错误:${err}`);
     });
 },
 components:{ // 自定义局部组件
     'homeHeaderList':headerListTpl,
-
     'homeMarket':homeMarketTpl,
     'banner-v':bannerTpl,
     'announcement-v':announcementTPL,

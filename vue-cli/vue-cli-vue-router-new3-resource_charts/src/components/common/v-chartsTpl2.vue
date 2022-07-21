@@ -2,9 +2,9 @@
    <div class="v-chartsBox">
         <span class="btnBox">
             <select :style="{background:'url(/static/img/'+coinSelected+'.png)no-repeat 10px 20px'}" v-model="coinSelected" @change="getLineData(5,0)">
-                <option  v-for="itime in coinList" :value="itime" v-text="itime"></option>
+                <option  v-for="(itime,i) in coinList"  :key='i' :value="itime" v-text="itime"></option>
             </select>
-            <button class="minBtn" v-for="(itime,index) in minBtnData" v-text="itime.BtnText" @click="getLineData(itime.value,index)" :class="itime.active"></button>
+            <button class="minBtn" v-for="(itime,i) in minBtnData"  :key='i' v-text="itime.BtnText" @click="getLineData(itime.value,index)" :class="itime.active"></button>
         </span>
         <ve-candle :data="chartData" :settings="chartSettings" :init-options="options"></ve-candle>
     </div>    
@@ -117,9 +117,9 @@ export default {
                     this.chartData.rows.push(itime);
                     d=null;
                 }
-            },(response) => {
+            },(err) => {
                 // 响应错误回调;
-                alert('请求错误')
+                console.error(`请求错误:${err}`)
             });
         }
     },
